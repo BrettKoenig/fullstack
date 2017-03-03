@@ -2,20 +2,22 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { MyTeamsPage, TeamsPage} from '../pages';
+import{ Api} from '../../shared/shared';
 
 @Component({
   selector: 'page-tournaments',
   templateUrl: 'tournaments.html'
 })
 export class TournamentsPage {
+  tournaments:any;
 
-  constructor(private nav: NavController, public navParams: NavParams) {}
+  constructor(private nav: NavController, public navParams: NavParams, private Api: Api) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TournamentsPage');
+    this.Api.getTournaments().then(data => this.tournaments = data);
   }
 
-  itemTapped(){
-    this.nav.push(TeamsPage);
+  itemTapped($event, tourney){
+    this.nav.push(TeamsPage, tourney);
   }
 }
