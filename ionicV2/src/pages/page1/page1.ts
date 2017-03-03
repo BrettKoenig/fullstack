@@ -12,4 +12,8 @@ export class Page1 {
     
   }
 
+  sayHello(){
+    console.log("Hello, World!")
+  }
+
 }
