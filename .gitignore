@@ -2,3 +2,4 @@ packages/
 packages
 Api/bin
 Api.Tests/bin
+ionic-tabs-app/node_modules
