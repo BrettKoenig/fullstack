@@ -1,4 +1,5 @@
-﻿using Api.Models;
+﻿using Api.Interfaces.Repositories;
+using Api.Models;
 using Api.Repositories;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,14 @@ namespace Api.Controllers
 {
     public class TournamentsController : ApiController
     {
+
+        private readonly ITournamentRepository _tournamentRepository;
+
+        public TournamentsController(ITournamentRepository tournamentRepository)
+        {
+            _tournamentRepository = tournamentRepository;
+        }
+
         [ResponseType(typeof(Tournament))]
         // GET: api/Products
         public IHttpActionResult Get()

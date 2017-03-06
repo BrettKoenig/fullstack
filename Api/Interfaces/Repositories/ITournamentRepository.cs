@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Api.Interfaces.Repositories
 {
-    interface ITournamentRepository
+    public interface ITournamentRepository
     {
         List<Tournament> Retrieve();
     }

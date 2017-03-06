@@ -85,7 +85,6 @@ C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\bin\Microsoft.Owin.Security.G
 C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\bin\System.Web.Http.Owin.xml
-C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\obj\Debug\Api.csprojResolveAssemblyReference.cache
 C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\obj\Debug\Api.dll
 C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\obj\Debug\Api.pdb
 C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\bin\System.Web.Cors.dll
@@ -94,3 +93,13 @@ C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\bin\System.Web.Http.Cors.xml
 C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\obj\Debug\Api.Migrations.InitialMigration.resources
 C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\obj\Debug\Api.csproj.GenerateResource.Cache
 C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\obj\Debug\Api.Migrations.AddingTournamentReferenceToGameAndStandings.resources
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\bin\Microsoft.Practices.ServiceLocation.dll
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\bin\StructureMap.dll
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\bin\StructureMap.Net4.dll
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\bin\StructureMap.Web.dll
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\bin\WebActivatorEx.dll
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\bin\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\bin\Microsoft.Practices.ServiceLocation.xml
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\bin\StructureMap.pdb
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\bin\StructureMap.Net4.pdb
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\bin\StructureMap.Web.pdb

@@ -65,3 +65,17 @@ C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api.Tests\bin\Debug\Microsoft.Owi
 C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api.Tests\obj\Debug\Api.Tests.csprojResolveAssemblyReference.cache
 C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api.Tests\obj\Debug\Api.Tests.dll
 C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api.Tests\obj\Debug\Api.Tests.pdb
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api.Tests\bin\Debug\Castle.Core.dll
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api.Tests\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api.Tests\bin\Debug\Moq.dll
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api.Tests\bin\Debug\StructureMap.dll
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api.Tests\bin\Debug\StructureMap.Net4.dll
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api.Tests\bin\Debug\StructureMap.Web.dll
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api.Tests\bin\Debug\WebActivatorEx.dll
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api.Tests\bin\Debug\Castle.Core.xml
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api.Tests\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api.Tests\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api.Tests\bin\Debug\Moq.xml
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api.Tests\bin\Debug\StructureMap.pdb
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api.Tests\bin\Debug\StructureMap.Net4.pdb
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api.Tests\bin\Debug\StructureMap.Web.pdb
