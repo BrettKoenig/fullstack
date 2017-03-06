@@ -11,7 +11,7 @@ using System.Web.Http.Description;
 
 namespace Api.Controllers
 {
-    [EnableCorsAttribute("http://localhost:58397", "*", "*")]
+    //[Authorize]
     public class ProductsController : ApiController
     {
         [ResponseType(typeof(Product))]

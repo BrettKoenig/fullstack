@@ -11,7 +11,6 @@ using System.Web.Http.Description;
 
 namespace Api.Controllers
 {
-    [EnableCorsAttribute("http://localhost:8100", "*", "*")]
     public class TournamentsController : ApiController
     {
         [ResponseType(typeof(Tournament))]

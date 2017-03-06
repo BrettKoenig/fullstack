@@ -9,7 +9,6 @@ using System.Web.Http.Cors;
 namespace Api.Controllers
 {
     //[Authorize]
-    [EnableCorsAttribute("http://localhost:8100", "*", "*")]
     public class ValuesController : ApiController
     {
         // GET api/values
