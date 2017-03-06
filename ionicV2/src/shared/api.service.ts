@@ -17,7 +17,7 @@ export class Api {
 
     getTournaments(){
         return new Promise(resolve => {
-            this.http.get(`${this.baseUrl}/api/Values`)
+            this.http.get(`${this.baseUrl}/api/Tournaments`)
             .subscribe(res => resolve(res.json()));
         });
     }
