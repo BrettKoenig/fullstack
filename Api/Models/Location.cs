@@ -9,7 +9,7 @@ namespace Api.Models
     {
         public int LocationId { get; set; }
         public string Name { get; set; }
-        public Decimal Latitude { get; set; }
-        public Decimal Longitude { get; set; }
+        public Double Latitude { get; set; }
+        public Double Longitude { get; set; }
     }
 }

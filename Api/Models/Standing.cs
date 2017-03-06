@@ -24,5 +24,7 @@ namespace Api.Models
         public int PointsDifferential { get; set; }
         public Division Division { get; set; }
         public int DivisionId { get; set; }
+        public Tournament Tournament { get; set; }
+        public int TournamentId { get; set; }
     }
 }

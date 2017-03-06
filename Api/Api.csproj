@@ -252,6 +252,10 @@
     <Compile Include="Migrations\201703061449477_InitialMigration.Designer.cs">
       <DependentUpon>201703061449477_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703061540108_AddingTournamentReferenceToGameAndStandings.cs" />
+    <Compile Include="Migrations\201703061540108_AddingTournamentReferenceToGameAndStandings.Designer.cs">
+      <DependentUpon>201703061540108_AddingTournamentReferenceToGameAndStandings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -339,6 +343,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201703061449477_InitialMigration.resx">
       <DependentUpon>201703061449477_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703061540108_AddingTournamentReferenceToGameAndStandings.resx">
+      <DependentUpon>201703061540108_AddingTournamentReferenceToGameAndStandings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
