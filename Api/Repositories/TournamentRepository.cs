@@ -1,4 +1,5 @@
-﻿using Api.Models;
+﻿using Api.Interfaces.Repositories;
+using Api.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,14 @@ namespace Api.Repositories
 {
     /// <summary>
     /// </summary>
-    public class TournamentRepository
+    public class TournamentRepository : ITournamentRepository
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         /// <summary>
         /// Retrieves the list of products.
         /// </summary>
         /// <returns></returns>
-        internal List<Tournament> Retrieve()
+        public List<Tournament> Retrieve()
         {
             return db.Tournaments.ToList();
         }
