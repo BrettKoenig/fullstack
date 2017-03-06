@@ -34,7 +34,7 @@ namespace Api.Providers
             ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
 
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin",
-                new[] { "http://localhost:58397" });
+                new[] { "http://localhost:58397", "http://localhost:8100" });
 
             if (user == null)
             {

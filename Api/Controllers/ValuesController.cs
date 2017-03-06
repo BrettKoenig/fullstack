@@ -4,10 +4,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
+    [EnableCorsAttribute("http://localhost:8100", "*", "*")]
     public class ValuesController : ApiController
     {
         // GET api/values
