@@ -29,5 +29,20 @@ namespace Api.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Division> Divisions { get; set; }
+
+        public System.Data.Entity.DbSet<Game> Games { get; set; }
+
+        public System.Data.Entity.DbSet<Location> Locations { get; set; }
+
+        public System.Data.Entity.DbSet<Product> Products { get; set; }
+
+        public System.Data.Entity.DbSet<Standing> Standings { get; set; }
+
+        public System.Data.Entity.DbSet<Team> Teams { get; set; }
+
+        public System.Data.Entity.DbSet<Tournament> Tournaments { get; set; }
+
     }
 }
