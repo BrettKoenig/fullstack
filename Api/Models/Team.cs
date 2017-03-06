@@ -10,7 +10,5 @@ namespace Api.Models
         public int TeamId { get; set; }
         public string Name { get; set; }
         public string Coach { get; set; }
-        public Division Division { get; set; }
-        public int DivisionId { get; set; }
     }
 }

@@ -91,3 +91,5 @@ C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\obj\Debug\Api.pdb
 C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\bin\System.Web.Cors.dll
 C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\bin\System.Web.Http.Cors.dll
 C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\bin\System.Web.Http.Cors.xml
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\obj\Debug\Api.Migrations.InitialMigration.resources
+C:\Users\bkoenig\Documents\HMB\Bench\FullStack\Api\obj\Debug\Api.csproj.GenerateResource.Cache
