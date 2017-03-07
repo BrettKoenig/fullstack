@@ -19,15 +19,11 @@ export class TeamsPage {
     let selectedTourney = this.navParams.data;
 
     this.teams = selectedTourney.standings;
-    // this.Api.getTournamentData(selectedTourney.tournamentId).subscribe(data => {
-    //   this.teams = data.teams;
-    //   console.log(this.teams);
-    // });
+    
     this.Api.setCurrentTournament(selectedTourney);
   }
 
   itemTapped($event, team) {
     this.navCtrl.push(TeamHomePage, team);
   }
-
 }

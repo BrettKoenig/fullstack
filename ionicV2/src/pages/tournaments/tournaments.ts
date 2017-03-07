@@ -14,9 +14,6 @@ export class TournamentsPage {
   constructor(private nav: NavController, public navParams: NavParams, private Api: Api) {}
 
   ionViewDidLoad() {
-    //old way with promises
-    //this.Api.getTournaments().then(data => this.tournaments = data);
-    //new way // 
     this.Api.getTournaments().subscribe(data => {
       this.tournaments = data;
     });
