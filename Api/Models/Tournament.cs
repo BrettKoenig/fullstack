@@ -9,7 +9,7 @@ namespace Api.Models
     {
         public int TournamentId { get; set; }
         public string Name { get; set; }
-        public List<Game> Games { get; set; }
-        public List<Standing> Standings { get; set; }
+        public virtual List<Game> Games { get; set; }
+        public virtual List<Standing> Standings { get; set; }
     }
 }

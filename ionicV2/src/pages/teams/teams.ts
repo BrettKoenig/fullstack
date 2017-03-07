@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { TeamHomePage } from '../pages';
+import { Api } from '../../shared/shared';
 
 @Component({
   selector: 'page-teams',
@@ -9,16 +10,16 @@ import { TeamHomePage } from '../pages';
 })
 export class TeamsPage {
 
-  teams = [
-    {id: 1, name: 'HC Elite'},
-    {id: 2, name: 'Team Takeover'},
-    {id: 3, name: 'DC Thunder'}
-  ];
+  teams = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Api: Api) { }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TeamsPage');
+    let selectedTourney = this.navParams.data;
+    // this.Api.getTournamentData(selectedTourney.tournamentId).subscribe(data => {
+    //   this.teams = data.teams;
+    //   console.log(this.teams);
+    // });
   }
 
   itemTapped($event, team) {

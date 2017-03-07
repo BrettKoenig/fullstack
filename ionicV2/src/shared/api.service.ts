@@ -23,7 +23,7 @@ export class Api {
     }
 
     getTournamentData(tourneyId) : Observable<any>{
-        return this.http.get(`${this.baseUrl}/tournaments-data/${tourneyId}.json`).map((response:Response) => {
+        return this.http.get(`${this.baseUrl}/api/Tournaments/GetTeamsInTournament/${tourneyId}`).map((response:Response) => {
             this.currentTourney = response.json();
             return this.currentTourney;
         });

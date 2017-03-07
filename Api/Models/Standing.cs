@@ -16,7 +16,11 @@ namespace Api.Models
         {
             get
             {
-                return Wins / (Wins + Losses);
+                if ((Wins + Losses) > 0)
+                {
+                    return Wins / (Wins + Losses);
+                }
+                return 0;
             }
         }
         public int PointsFor { get; set; }

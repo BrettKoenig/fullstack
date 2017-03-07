@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { MyTeamsPage, TeamsPage} from '../pages';
-import{ Api} from '../../shared/shared';
+import { Api } from '../../shared/shared';
 
 @Component({
   selector: 'page-tournaments',

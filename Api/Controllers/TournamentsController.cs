@@ -28,14 +28,27 @@ namespace Api.Controllers
         {
             try
             {
-                var tournamentRepository = new TournamentRepository();
-                return Ok(tournamentRepository.Retrieve());
+                var tournaments = _tournamentRepository.Retrieve();
+                return Ok(tournaments);
             }
             catch (Exception e)
             {
                 return InternalServerError(e);
             }
         }
+
+        //[ResponseType(typeof(Team))]
+        //public IHttpActionResult GetTeamsInTournament(int id)
+        //{
+        //    try
+        //    {
+        //        return Ok(_tournamentRepository.GetTeamsInTournament(id));
+        //    }
+        //    catch(Exception e)
+        //    {
+        //        return InternalServerError(e);
+        //    }
+        //}
         
     }
 }

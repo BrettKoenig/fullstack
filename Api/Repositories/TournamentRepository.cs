@@ -22,5 +22,26 @@ namespace Api.Repositories
         {
             return db.Tournaments.ToList();
         }
+
+        public Tournament Retrieve(int id)
+        {
+            var tournament = db.Tournaments.Where(x => x.TournamentId == id).FirstOrDefault();
+            if(tournament == null)
+            {
+                return new Tournament();
+            }
+            return tournament;
+        }
+
+        //public List<Team> GetTeamsInTournament(int id)
+        //{
+        //    List<Team> teams = new List<Team>();
+        //    foreach(var game in Retrieve(id).Games)
+        //    {
+        //        teams.Add(game.Team1);
+        //        teams.Add(game.Team2);
+        //    }
+        //    return teams;
+        //}
     }
 }
