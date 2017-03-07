@@ -15,6 +15,6 @@
 
 <ion-content padding>
   <button ion-item *ngFor="let team of teams" (click)="itemTapped($event, team)">
-    {{team.name}}
+    {{team.team.name}}
     </button>
 </ion-content>

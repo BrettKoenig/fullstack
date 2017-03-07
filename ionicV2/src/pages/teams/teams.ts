@@ -16,6 +16,8 @@ export class TeamsPage {
 
   ionViewDidLoad() {
     let selectedTourney = this.navParams.data;
+
+    this.teams = selectedTourney.standings;
     // this.Api.getTournamentData(selectedTourney.tournamentId).subscribe(data => {
     //   this.teams = data.teams;
     //   console.log(this.teams);
