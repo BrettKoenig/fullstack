@@ -10,6 +10,5 @@ namespace Api.Interfaces.Repositories
     public interface ITournamentRepository
     {
         List<Tournament> Retrieve();
-        //List<Team> GetTeamsInTournament(int id);
     }
 }

@@ -32,16 +32,6 @@ namespace Api.Repositories
             }
             return tournament;
         }
-
-        //public List<Team> GetTeamsInTournament(int id)
-        //{
-        //    List<Team> teams = new List<Team>();
-        //    foreach(var game in Retrieve(id).Games)
-        //    {
-        //        teams.Add(game.Team1);
-        //        teams.Add(game.Team2);
-        //    }
-        //    return teams;
-        //}
+        
     }
 }

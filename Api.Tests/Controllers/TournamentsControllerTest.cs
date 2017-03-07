@@ -17,14 +17,26 @@ namespace Api.Tests.Controllers
     [TestClass]
     public class TournamentsControllerTests
     {
+
         [TestMethod]
-        public void Get()
+        public void TournamentsControllerGet()
         {
             // Arrange
-            
+            Mock<ITournamentRepository> _mockTournamentRepository = new Mock<ITournamentRepository>();
+            _mockTournamentRepository.Setup(x => x.Retrieve()).Returns(new List<Tournament>{
+                new Tournament { Name = "Hello", TournamentId = 1}, 
+                new Tournament { Name = "Tournament 2", TournamentId = 2 }
+            });
+           TournamentsController controller = new TournamentsController(_mockTournamentRepository.Object);
+
             // Act
-            
+            IHttpActionResult result = controller.Get() as IHttpActionResult;
+
             // Assert
+            Assert.IsNotNull(result);
+            //Assert.AreEqual(2, result.Count());
+            //Assert.AreEqual("value1", result.ElementAt(0));
+            //Assert.AreEqual("value2", result.ElementAt(1));
         }
         
     }
