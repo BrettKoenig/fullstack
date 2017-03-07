@@ -9,23 +9,34 @@ export class Api {
 
     private baseUrl = 'http://localhost:58352';
 
-    currentTourney: any = {};
+    currentTournament: any = {};
 
     constructor(private http: Http) {
 
     }
 
-    getTournaments(){
-        return new Promise(resolve => {
-            this.http.get(`${this.baseUrl}/api/Tournaments`)
-            .subscribe(res => resolve(res.json()));
-        });
+    //old way with promises
+    // getTournaments(){
+    //     return new Promise(resolve => {
+    //         this.http.get(`${this.baseUrl}/api/Tournaments`)
+    //         .subscribe(res => resolve(res.json()));
+    //     });
+    // }
+
+    //new way with observable
+    getTournaments() : Observable<any>{
+        return this.http.get(`${this.baseUrl}/api/Tournaments`).map((response:Response) => {
+            return response.json();
+        })
     }
 
-    getTournamentData(tourneyId) : Observable<any>{
-        return this.http.get(`${this.baseUrl}/api/Tournaments/GetTeamsInTournament/${tourneyId}`).map((response:Response) => {
-            this.currentTourney = response.json();
-            return this.currentTourney;
-        });
+    setCurrentTournament(tournament){
+        this.currentTournament = tournament
     }
+    // getTournamentData(tourneyId) : Observable<any>{
+    //     return this.http.get(`${this.baseUrl}/api/Tournaments/GetTeamsInTournament/${tourneyId}`).map((response:Response) => {
+    //         this.currentTourney = response.json();
+    //         return this.currentTourney;
+    //     });
+    // }
 }

@@ -8,6 +8,7 @@ import { Api } from '../../shared/shared';
   selector: 'page-teams',
   templateUrl: 'teams.html'
 })
+
 export class TeamsPage {
 
   teams = [];
@@ -22,6 +23,7 @@ export class TeamsPage {
     //   this.teams = data.teams;
     //   console.log(this.teams);
     // });
+    this.Api.setCurrentTournament(selectedTourney);
   }
 
   itemTapped($event, team) {
