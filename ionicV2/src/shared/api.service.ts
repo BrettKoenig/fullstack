@@ -17,11 +17,16 @@ export class Api {
 
     getTournaments() : Observable<any>{
         return this.http.get(`${this.baseUrl}/api/Tournaments`).map((response:Response) => {
+            console.log(response.json())
             return response.json();
         })
     }
 
     setCurrentTournament(tournament){
         this.currentTournament = tournament
+    }
+
+    getCurrentTournament(){
+        return this.currentTournament;
     }
 }
