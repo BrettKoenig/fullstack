@@ -3,3 +3,5 @@ packages
 Api/bin
 Api.Tests/bin
 ionic-tabs-app/node_modules
+Api.Tests/obj
+Api/obj
