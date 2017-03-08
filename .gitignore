@@ -1,11 +1,12 @@
 packages/
 packages
+*/bin
 Api/bin
 Api.Tests/bin
 ionic-tabs-app/node_modules
 Api.Tests/obj
 Api/obj
-*/Api/obj
 Api/obj/
+*/obj
 .vs/FullStack/v14/.suo
 
