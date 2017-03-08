@@ -20,5 +20,17 @@ namespace Api.IntegrationTests
 
             Assert.That(tournaments.Count, Is.GreaterThan(0));
         }
+
+        [Test]
+        public void ShouldGetOneTournament()
+        {
+            var sut = new TournamentRepository();
+            var tournament = sut.Retrieve(1);
+
+            Assert.That(tournament, Is.Not.Null);
+            Assert.That(tournament.TournamentId, Is.EqualTo(1));
+        }
+
+
     }
 }
