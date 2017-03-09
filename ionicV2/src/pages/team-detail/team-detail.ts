@@ -31,7 +31,7 @@ export class TeamDetailPage {
       .filter(g => g.team1Id === this.team.teamId || g.team2Id === this.team.teamId)
       .map(g => {
         let isTeam1 = (g.team1Id === this.team.teamId);
-        let opponentName = isTeam1 ? g.team2Id : g.team1Id;
+        let opponentName = isTeam1 ? g.team2.name : g.team1.name;
         let scoreDisplay = this.getScoreDisplay(isTeam1, g.team1Score, g.team2Score);
         return {
           gameId: g.gameId,
@@ -44,27 +44,7 @@ export class TeamDetailPage {
         };
       })
       .value();
-
-    // console.log("GAMES")
-    // console.log(this.games)
-
-    // let loader = this.LoadingController.create({
-    //   content: 'Getting tournaments...'
-    // });
-
-    // loader.present().then(() => {
-    //   this.Api.getTeamById().subscribe(data => {
-    //     this.tournaments = data;
-    //     loader.dismiss();
-    //   });
-    // });
   }
-
-  // getTeamById(teamId) {
-  //   this.Api.getTeamById(teamId).subscribe(data => {
-  //     return data;
-  //   });
-  // }
 
   getScoreDisplay(isTeam1, team1Score, team2Score) {
     if (team1Score && team2Score) {

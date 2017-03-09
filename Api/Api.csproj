@@ -280,21 +280,9 @@
     </Compile>
     <Compile Include="Interfaces\Repositories\ITeamRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITournamentRepository.cs" />
-    <Compile Include="Migrations\201703091857589_InitialMigration.cs" />
-    <Compile Include="Migrations\201703091857589_InitialMigration.Designer.cs">
-      <DependentUpon>201703091857589_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703091906058_AddingForeignKeyForTeamInStanding.cs" />
-    <Compile Include="Migrations\201703091906058_AddingForeignKeyForTeamInStanding.Designer.cs">
-      <DependentUpon>201703091906058_AddingForeignKeyForTeamInStanding.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703091921317_addingforeignkeyforstandings.cs" />
-    <Compile Include="Migrations\201703091921317_addingforeignkeyforstandings.Designer.cs">
-      <DependentUpon>201703091921317_addingforeignkeyforstandings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703091930064_makingTeamIdNullableForStanding.cs" />
-    <Compile Include="Migrations\201703091930064_makingTeamIdNullableForStanding.Designer.cs">
-      <DependentUpon>201703091930064_makingTeamIdNullableForStanding.cs</DependentUpon>
+    <Compile Include="Migrations\201703092030066_InitialMigration.cs" />
+    <Compile Include="Migrations\201703092030066_InitialMigration.Designer.cs">
+      <DependentUpon>201703092030066_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -383,17 +371,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703091857589_InitialMigration.resx">
-      <DependentUpon>201703091857589_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703091906058_AddingForeignKeyForTeamInStanding.resx">
-      <DependentUpon>201703091906058_AddingForeignKeyForTeamInStanding.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703091921317_addingforeignkeyforstandings.resx">
-      <DependentUpon>201703091921317_addingforeignkeyforstandings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703091930064_makingTeamIdNullableForStanding.resx">
-      <DependentUpon>201703091930064_makingTeamIdNullableForStanding.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703092030066_InitialMigration.resx">
+      <DependentUpon>201703092030066_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

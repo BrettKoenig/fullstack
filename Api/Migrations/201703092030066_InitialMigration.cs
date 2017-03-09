@@ -74,7 +74,7 @@ namespace Api.Migrations
                 c => new
                     {
                         StandingId = c.Int(nullable: false, identity: true),
-                        TeamId = c.Int(nullable: false),
+                        TeamId = c.Int(),
                         Wins = c.Int(nullable: false),
                         Losses = c.Int(nullable: false),
                         PointsFor = c.Int(nullable: false),
@@ -85,7 +85,7 @@ namespace Api.Migrations
                     })
                 .PrimaryKey(t => t.StandingId)
                 .ForeignKey("dbo.Divisions", t => t.DivisionId, cascadeDelete: true)
-                .ForeignKey("dbo.Teams", t => t.TeamId, cascadeDelete: true)
+                .ForeignKey("dbo.Teams", t => t.TeamId)
                 .ForeignKey("dbo.Tournaments", t => t.TournamentId, cascadeDelete: true)
                 .Index(t => t.TeamId)
                 .Index(t => t.DivisionId)

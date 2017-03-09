@@ -28,48 +28,49 @@ namespace Api.Migrations
             //    );
             //
             context.Tournaments.AddOrUpdate(
-    t => t.Name,
-    new Tournament { TournamentId = 1, Name = "Cager Classic" },
-    new Tournament { TournamentId = 2, Name = "Holiday Hoops Challenge" },
-    new Tournament { TournamentId = 3, Name = "Summer Showdown" },
-    new Tournament { TournamentId = 4, Name = "March Madness Tournament" });
+                t => t.Name,
+                new Tournament { TournamentId = 1, Name = "Cager Classic" },
+                new Tournament { TournamentId = 2, Name = "Holiday Hoops Challenge" },
+                new Tournament { TournamentId = 3, Name = "Summer Showdown" },
+                new Tournament { TournamentId = 4, Name = "March Madness Tournament" }
+            );
 
             context.Games.AddOrUpdate(
                 g => g.GameId,
-                new Game { GameId = 7969, LocationId = 4, Team1Id = 7, Team2Id = 10, Time = new DateTime(2016, 7, 16, 8, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7970, LocationId = 2, Team1Id = 3, Team2Id = 4, Time = new DateTime(2016, 7, 16, 8, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7971, LocationId = 3, Team1Id = 6, Team2Id = 11, Time = new DateTime(2016, 7, 16, 8, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7972, LocationId = 1, Team1Id = 2, Team2Id = 5, Time = new DateTime(2016, 7, 16, 8, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7973, LocationId = 3, Team1Id = 13, Team2Id = 16, Time = new DateTime(2016, 7, 16, 9, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7974, LocationId = 2, Team1Id = 12, Team2Id = 17, Time = new DateTime(2016, 7, 16, 9, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7975, LocationId = 1, Team1Id = 8, Team2Id = 9, Time = new DateTime(2016, 7, 16, 9, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7976, LocationId = 4, Team1Id = 14, Team2Id = 15, Time = new DateTime(2016, 7, 16, 9, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7977, LocationId = 2, Team1Id = 2, Team2Id = 3, Time = new DateTime(2016, 7, 16, 10, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7978, LocationId = 1, Team1Id = 1, Team2Id = 5, Time = new DateTime(2016, 7, 16, 10, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7979, LocationId = 3, Team1Id = 6, Team2Id = 10, Time = new DateTime(2016, 7, 16, 10, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7980, LocationId = 3, Team1Id = 12, Team2Id = 16, Time = new DateTime(2016, 7, 16, 11, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7981, LocationId = 4, Team1Id = 17, Team2Id = 15, Time = new DateTime(2016, 7, 16, 11, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7982, LocationId = 2, Team1Id = 7, Team2Id = 8, Time = new DateTime(2016, 7, 16, 11, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7983, LocationId = 1, Team1Id = 11, Team2Id = 9, Time = new DateTime(2016, 7, 16, 11, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7984, LocationId = 2, Team1Id = 1, Team2Id = 4, Time = new DateTime(2016, 7, 16, 12, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7989, LocationId = 1, Team1Id = 13, Team2Id = 14, Time = new DateTime(2016, 7, 16, 12, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7990, LocationId = 3, Team1Id = 5, Team2Id = 3, Time = new DateTime(2016, 7, 16, 12, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7991, LocationId = 1, Team1Id = 6, Team2Id = 9, Time = new DateTime(2016, 7, 16, 13, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7993, LocationId = 4, Team1Id = 12, Team2Id = 15, Time = new DateTime(2016, 7, 16, 13, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7986, LocationId = 3, Team1Id = 11, Team2Id = 7, Time = new DateTime(2016, 7, 16, 13, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7987, LocationId = 2, Team1Id = 10, Team2Id = 8, Time = new DateTime(2016, 7, 16, 13, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7988, LocationId = 1, Team1Id = 16, Team2Id = 14, Time = new DateTime(2016, 7, 16, 14, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7994, LocationId = 4, Team1Id = 4, Team2Id = 2, Time = new DateTime(2016, 7, 16, 14, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7992, LocationId = 3, Team1Id = 1, Team2Id = 3, Time = new DateTime(2016, 7, 16, 14, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7985, LocationId = 2, Team1Id = 17, Team2Id = 13, Time = new DateTime(2016, 7, 16, 14, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7995, LocationId = 2, Team1Id = 9, Team2Id = 7, Time = new DateTime(2016, 7, 16, 15, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7997, LocationId = 3, Team1Id = 10, Team2Id = 11, Time = new DateTime(2016, 7, 16, 15, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7998, LocationId = 1, Team1Id = 6, Team2Id = 8, Time = new DateTime(2016, 7, 16, 15, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7999, LocationId = 2, Team1Id = 15, Team2Id = 13, Time = new DateTime(2016, 7, 16, 16, 0, 0), TournamentId = 1 },
-                new Game { GameId = 8000, LocationId = 3, Team1Id = 16, Team2Id = 17, Time = new DateTime(2016, 7, 16, 16, 0, 0), TournamentId = 1 },
-                new Game { GameId = 8002, LocationId = 4, Team1Id = 1, Team2Id = 2, Time = new DateTime(2016, 7, 16, 16, 0, 0), TournamentId = 1 },
-                new Game { GameId = 7996, LocationId = 1, Team1Id = 12, Team2Id = 14, Time = new DateTime(2016, 7, 16, 16, 0, 0), TournamentId = 1 },
-                new Game { GameId = 8001, LocationId = 1, Team1Id = 4, Team2Id = 5, Time = new DateTime(2016, 7, 16, 17, 0, 0), TournamentId = 1 }
+                new Game { GameId = 1, LocationId = 4, Team1Id = 7, Team2Id = 10, Time = new DateTime(2016, 7, 16, 8, 0, 0), TournamentId = 1 },
+                new Game { GameId = 2, LocationId = 2, Team1Id = 3, Team2Id = 4, Time = new DateTime(2016, 7, 16, 8, 0, 0), TournamentId = 1 },
+                new Game { GameId = 3, LocationId = 3, Team1Id = 6, Team2Id = 11, Time = new DateTime(2016, 7, 16, 8, 0, 0), TournamentId = 1 },
+                new Game { GameId = 4, LocationId = 1, Team1Id = 2, Team2Id = 5, Time = new DateTime(2016, 7, 16, 8, 0, 0), TournamentId = 1 },
+                new Game { GameId = 5, LocationId = 3, Team1Id = 13, Team2Id = 16, Time = new DateTime(2016, 7, 16, 9, 0, 0), TournamentId = 1 },
+                new Game { GameId = 6, LocationId = 2, Team1Id = 12, Team2Id = 17, Time = new DateTime(2016, 7, 16, 9, 0, 0), TournamentId = 1 },
+                new Game { GameId = 7, LocationId = 1, Team1Id = 8, Team2Id = 9, Time = new DateTime(2016, 7, 16, 9, 0, 0), TournamentId = 1 },
+                new Game { GameId = 8, LocationId = 4, Team1Id = 14, Team2Id = 15, Time = new DateTime(2016, 7, 16, 9, 0, 0), TournamentId = 1 },
+                new Game { GameId = 9, LocationId = 2, Team1Id = 2, Team2Id = 3, Time = new DateTime(2016, 7, 16, 10, 0, 0), TournamentId = 1 },
+                new Game { GameId = 10, LocationId = 1, Team1Id = 1, Team2Id = 5, Time = new DateTime(2016, 7, 16, 10, 0, 0), TournamentId = 1 },
+                new Game { GameId = 11, LocationId = 3, Team1Id = 6, Team2Id = 10, Time = new DateTime(2016, 7, 16, 10, 0, 0), TournamentId = 1 },
+                new Game { GameId = 12, LocationId = 3, Team1Id = 12, Team2Id = 16, Time = new DateTime(2016, 7, 16, 11, 0, 0), TournamentId = 1 },
+                new Game { GameId = 13, LocationId = 4, Team1Id = 17, Team2Id = 15, Time = new DateTime(2016, 7, 16, 11, 0, 0), TournamentId = 1 },
+                new Game { GameId = 14, LocationId = 2, Team1Id = 7, Team2Id = 8, Time = new DateTime(2016, 7, 16, 11, 0, 0), TournamentId = 1 },
+                new Game { GameId = 15, LocationId = 1, Team1Id = 11, Team2Id = 9, Time = new DateTime(2016, 7, 16, 11, 0, 0), TournamentId = 1 },
+                new Game { GameId = 16, LocationId = 2, Team1Id = 1, Team2Id = 4, Time = new DateTime(2016, 7, 16, 12, 0, 0), TournamentId = 1 },
+                new Game { GameId = 17, LocationId = 1, Team1Id = 13, Team2Id = 14, Time = new DateTime(2016, 7, 16, 12, 0, 0), TournamentId = 1 },
+                new Game { GameId = 18, LocationId = 3, Team1Id = 5, Team2Id = 3, Time = new DateTime(2016, 7, 16, 12, 0, 0), TournamentId = 1 },
+                new Game { GameId = 19, LocationId = 1, Team1Id = 6, Team2Id = 9, Time = new DateTime(2016, 7, 16, 13, 0, 0), TournamentId = 1 },
+                new Game { GameId = 20, LocationId = 4, Team1Id = 12, Team2Id = 15, Time = new DateTime(2016, 7, 16, 13, 0, 0), TournamentId = 1 },
+                new Game { GameId = 21, LocationId = 3, Team1Id = 11, Team2Id = 7, Time = new DateTime(2016, 7, 16, 13, 0, 0), TournamentId = 1 },
+                new Game { GameId = 22, LocationId = 2, Team1Id = 10, Team2Id = 8, Time = new DateTime(2016, 7, 16, 13, 0, 0), TournamentId = 1 },
+                new Game { GameId = 23, LocationId = 1, Team1Id = 16, Team2Id = 14, Time = new DateTime(2016, 7, 16, 14, 0, 0), TournamentId = 1 },
+                new Game { GameId = 24, LocationId = 4, Team1Id = 4, Team2Id = 2, Time = new DateTime(2016, 7, 16, 14, 0, 0), TournamentId = 1 },
+                new Game { GameId = 25, LocationId = 3, Team1Id = 1, Team2Id = 3, Time = new DateTime(2016, 7, 16, 14, 0, 0), TournamentId = 1 },
+                new Game { GameId = 26, LocationId = 2, Team1Id = 17, Team2Id = 13, Time = new DateTime(2016, 7, 16, 14, 0, 0), TournamentId = 1 },
+                new Game { GameId = 27, LocationId = 2, Team1Id = 9, Team2Id = 7, Time = new DateTime(2016, 7, 16, 15, 0, 0), TournamentId = 1 },
+                new Game { GameId = 28, LocationId = 3, Team1Id = 10, Team2Id = 11, Time = new DateTime(2016, 7, 16, 15, 0, 0), TournamentId = 1 },
+                new Game { GameId = 29, LocationId = 1, Team1Id = 6, Team2Id = 8, Time = new DateTime(2016, 7, 16, 15, 0, 0), TournamentId = 1 },
+                new Game { GameId = 30, LocationId = 2, Team1Id = 15, Team2Id = 13, Time = new DateTime(2016, 7, 16, 16, 0, 0), TournamentId = 1 },
+                new Game { GameId = 31, LocationId = 3, Team1Id = 16, Team2Id = 17, Time = new DateTime(2016, 7, 16, 16, 0, 0), TournamentId = 1 },
+                new Game { GameId = 32, LocationId = 4, Team1Id = 1, Team2Id = 2, Time = new DateTime(2016, 7, 16, 16, 0, 0), TournamentId = 1 },
+                new Game { GameId = 33, LocationId = 1, Team1Id = 12, Team2Id = 14, Time = new DateTime(2016, 7, 16, 16, 0, 0), TournamentId = 1 },
+                new Game { GameId = 34, LocationId = 1, Team1Id = 4, Team2Id = 5, Time = new DateTime(2016, 7, 16, 17, 0, 0), TournamentId = 1 }
                 );
 
             context.Locations.AddOrUpdate(
@@ -79,7 +80,7 @@ namespace Api.Migrations
                 new Location { LocationId = 3, Name = "Meadowbrook Ct. 3", Latitude = 39.248958, Longitude = -76.822041 },
                 new Location { LocationId = 4, Name = "Meadowbrook Ct. 4", Latitude = 39.248958, Longitude = -76.822041 }
                 );
-            
+
             context.Teams.AddOrUpdate(
                 t => t.TeamId,
                 new Team { TeamId = 1, Name = "Baltimore Stars", Coach = "James" },

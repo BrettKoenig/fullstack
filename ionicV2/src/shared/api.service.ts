@@ -17,14 +17,12 @@ export class Api {
 
     getTournaments() : Observable<any>{
         return this.http.get(`${this.baseUrl}/api/Tournaments`).map((response:Response) => {
-            console.log(response.json())
             return response.json();
         })
     }
 
     getTeamById(teamId) : Observable<any>{
         return this.http.get(`${this.baseUrl}/api/Teams/${teamId}`).map((response:Response) => {
-            console.log(response.json())
             return response.json();
         })
     }
