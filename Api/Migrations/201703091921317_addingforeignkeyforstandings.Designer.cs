@@ -7,13 +7,13 @@ namespace Api.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitialMigration : IMigrationMetadata
+    public sealed partial class addingforeignkeyforstandings : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addingforeignkeyforstandings));
         
         string IMigrationMetadata.Id
         {
-            get { return "201703061449477_InitialMigration"; }
+            get { return "201703091921317_addingforeignkeyforstandings"; }
         }
         
         string IMigrationMetadata.Source

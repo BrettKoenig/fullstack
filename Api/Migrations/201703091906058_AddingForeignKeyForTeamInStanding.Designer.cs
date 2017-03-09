@@ -7,13 +7,13 @@ namespace Api.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddingTournamentReferenceToGameAndStandings : IMigrationMetadata
+    public sealed partial class AddingForeignKeyForTeamInStanding : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddingTournamentReferenceToGameAndStandings));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddingForeignKeyForTeamInStanding));
         
         string IMigrationMetadata.Id
         {
-            get { return "201703061540108_AddingTournamentReferenceToGameAndStandings"; }
+            get { return "201703091906058_AddingForeignKeyForTeamInStanding"; }
         }
         
         string IMigrationMetadata.Source

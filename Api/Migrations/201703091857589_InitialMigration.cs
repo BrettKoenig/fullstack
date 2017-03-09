@@ -22,24 +22,22 @@ namespace Api.Migrations
                     {
                         GameId = c.Int(nullable: false, identity: true),
                         LocationId = c.Int(nullable: false),
-                        Team1Id = c.Int(nullable: false),
-                        Team2Id = c.Int(nullable: false),
+                        Team1Id = c.Int(),
+                        Team2Id = c.Int(),
                         Team1Score = c.Int(nullable: false),
                         Team2Score = c.Int(nullable: false),
                         Time = c.DateTime(nullable: false),
-                        Team1_TeamId = c.Int(),
-                        Team2_TeamId = c.Int(),
-                        Tournament_TournamentId = c.Int(),
+                        TournamentId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.GameId)
                 .ForeignKey("dbo.Locations", t => t.LocationId, cascadeDelete: true)
-                .ForeignKey("dbo.Teams", t => t.Team1_TeamId)
-                .ForeignKey("dbo.Teams", t => t.Team2_TeamId)
-                .ForeignKey("dbo.Tournaments", t => t.Tournament_TournamentId)
+                .ForeignKey("dbo.Teams", t => t.Team1Id)
+                .ForeignKey("dbo.Teams", t => t.Team2Id)
+                .ForeignKey("dbo.Tournaments", t => t.TournamentId, cascadeDelete: true)
                 .Index(t => t.LocationId)
-                .Index(t => t.Team1_TeamId)
-                .Index(t => t.Team2_TeamId)
-                .Index(t => t.Tournament_TournamentId);
+                .Index(t => t.Team1Id)
+                .Index(t => t.Team2Id)
+                .Index(t => t.TournamentId);
             
             CreateTable(
                 "dbo.Locations",
@@ -47,8 +45,8 @@ namespace Api.Migrations
                     {
                         LocationId = c.Int(nullable: false, identity: true),
                         Name = c.String(),
-                        Latitude = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Longitude = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Latitude = c.Double(nullable: false),
+                        Longitude = c.Double(nullable: false),
                     })
                 .PrimaryKey(t => t.LocationId);
             
@@ -61,6 +59,37 @@ namespace Api.Migrations
                         Coach = c.String(),
                     })
                 .PrimaryKey(t => t.TeamId);
+            
+            CreateTable(
+                "dbo.Tournaments",
+                c => new
+                    {
+                        TournamentId = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.TournamentId);
+            
+            CreateTable(
+                "dbo.Standings",
+                c => new
+                    {
+                        StandingId = c.Int(nullable: false, identity: true),
+                        TeamId = c.Int(nullable: false),
+                        Wins = c.Int(nullable: false),
+                        Losses = c.Int(nullable: false),
+                        PointsFor = c.Int(nullable: false),
+                        PointsAgainst = c.Int(nullable: false),
+                        PointsDifferential = c.Int(nullable: false),
+                        DivisionId = c.Int(nullable: false),
+                        TournamentId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.StandingId)
+                .ForeignKey("dbo.Divisions", t => t.DivisionId, cascadeDelete: true)
+                .ForeignKey("dbo.Teams", t => t.TeamId, cascadeDelete: true)
+                .ForeignKey("dbo.Tournaments", t => t.TournamentId, cascadeDelete: true)
+                .Index(t => t.TeamId)
+                .Index(t => t.DivisionId)
+                .Index(t => t.TournamentId);
             
             CreateTable(
                 "dbo.Products",
@@ -97,37 +126,6 @@ namespace Api.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
-            
-            CreateTable(
-                "dbo.Standings",
-                c => new
-                    {
-                        StandingId = c.Int(nullable: false, identity: true),
-                        TeamId = c.Int(nullable: false),
-                        Wins = c.Int(nullable: false),
-                        Losses = c.Int(nullable: false),
-                        PointsFor = c.Int(nullable: false),
-                        PointsAgainst = c.Int(nullable: false),
-                        PointsDifferential = c.Int(nullable: false),
-                        DivisionId = c.Int(nullable: false),
-                        Tournament_TournamentId = c.Int(),
-                    })
-                .PrimaryKey(t => t.StandingId)
-                .ForeignKey("dbo.Divisions", t => t.DivisionId, cascadeDelete: true)
-                .ForeignKey("dbo.Teams", t => t.TeamId, cascadeDelete: true)
-                .ForeignKey("dbo.Tournaments", t => t.Tournament_TournamentId)
-                .Index(t => t.TeamId)
-                .Index(t => t.DivisionId)
-                .Index(t => t.Tournament_TournamentId);
-            
-            CreateTable(
-                "dbo.Tournaments",
-                c => new
-                    {
-                        TournamentId = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                    })
-                .PrimaryKey(t => t.TournamentId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -181,35 +179,35 @@ namespace Api.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Standings", "Tournament_TournamentId", "dbo.Tournaments");
-            DropForeignKey("dbo.Games", "Tournament_TournamentId", "dbo.Tournaments");
+            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Standings", "TournamentId", "dbo.Tournaments");
             DropForeignKey("dbo.Standings", "TeamId", "dbo.Teams");
             DropForeignKey("dbo.Standings", "DivisionId", "dbo.Divisions");
-            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Games", "Team2_TeamId", "dbo.Teams");
-            DropForeignKey("dbo.Games", "Team1_TeamId", "dbo.Teams");
+            DropForeignKey("dbo.Games", "TournamentId", "dbo.Tournaments");
+            DropForeignKey("dbo.Games", "Team2Id", "dbo.Teams");
+            DropForeignKey("dbo.Games", "Team1Id", "dbo.Teams");
             DropForeignKey("dbo.Games", "LocationId", "dbo.Locations");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.Standings", new[] { "Tournament_TournamentId" });
-            DropIndex("dbo.Standings", new[] { "DivisionId" });
-            DropIndex("dbo.Standings", new[] { "TeamId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Games", new[] { "Tournament_TournamentId" });
-            DropIndex("dbo.Games", new[] { "Team2_TeamId" });
-            DropIndex("dbo.Games", new[] { "Team1_TeamId" });
+            DropIndex("dbo.Standings", new[] { "TournamentId" });
+            DropIndex("dbo.Standings", new[] { "DivisionId" });
+            DropIndex("dbo.Standings", new[] { "TeamId" });
+            DropIndex("dbo.Games", new[] { "TournamentId" });
+            DropIndex("dbo.Games", new[] { "Team2Id" });
+            DropIndex("dbo.Games", new[] { "Team1Id" });
             DropIndex("dbo.Games", new[] { "LocationId" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.Tournaments");
-            DropTable("dbo.Standings");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Products");
+            DropTable("dbo.Standings");
+            DropTable("dbo.Tournaments");
             DropTable("dbo.Teams");
             DropTable("dbo.Locations");
             DropTable("dbo.Games");

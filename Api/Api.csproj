@@ -266,6 +266,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Controllers\TournamentsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DependencyResolution\DefaultRegistry.cs" />
@@ -277,14 +278,23 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\Repositories\ITeamRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITournamentRepository.cs" />
-    <Compile Include="Migrations\201703061449477_InitialMigration.cs" />
-    <Compile Include="Migrations\201703061449477_InitialMigration.Designer.cs">
-      <DependentUpon>201703061449477_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201703091857589_InitialMigration.cs" />
+    <Compile Include="Migrations\201703091857589_InitialMigration.Designer.cs">
+      <DependentUpon>201703091857589_InitialMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703061540108_AddingTournamentReferenceToGameAndStandings.cs" />
-    <Compile Include="Migrations\201703061540108_AddingTournamentReferenceToGameAndStandings.Designer.cs">
-      <DependentUpon>201703061540108_AddingTournamentReferenceToGameAndStandings.cs</DependentUpon>
+    <Compile Include="Migrations\201703091906058_AddingForeignKeyForTeamInStanding.cs" />
+    <Compile Include="Migrations\201703091906058_AddingForeignKeyForTeamInStanding.Designer.cs">
+      <DependentUpon>201703091906058_AddingForeignKeyForTeamInStanding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703091921317_addingforeignkeyforstandings.cs" />
+    <Compile Include="Migrations\201703091921317_addingforeignkeyforstandings.Designer.cs">
+      <DependentUpon>201703091921317_addingforeignkeyforstandings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703091930064_makingTeamIdNullableForStanding.cs" />
+    <Compile Include="Migrations\201703091930064_makingTeamIdNullableForStanding.Designer.cs">
+      <DependentUpon>201703091930064_makingTeamIdNullableForStanding.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -299,6 +309,7 @@
     <Compile Include="Models\Tournament.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Repositories\TeamRepository.cs" />
     <Compile Include="Repositories\TournamentRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -372,11 +383,17 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703061449477_InitialMigration.resx">
-      <DependentUpon>201703061449477_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703091857589_InitialMigration.resx">
+      <DependentUpon>201703091857589_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703061540108_AddingTournamentReferenceToGameAndStandings.resx">
-      <DependentUpon>201703061540108_AddingTournamentReferenceToGameAndStandings.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703091906058_AddingForeignKeyForTeamInStanding.resx">
+      <DependentUpon>201703091906058_AddingForeignKeyForTeamInStanding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703091921317_addingforeignkeyforstandings.resx">
+      <DependentUpon>201703091921317_addingforeignkeyforstandings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703091930064_makingTeamIdNullableForStanding.resx">
+      <DependentUpon>201703091930064_makingTeamIdNullableForStanding.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

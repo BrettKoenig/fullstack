@@ -20,6 +20,8 @@ export class TournamentsPage {
 
     loader.present().then(() => {
       this.Api.getTournaments().subscribe(data => {
+        console.log("TOURNAMENTS")
+        console.log(data)
         this.tournaments = data;
         loader.dismiss();
       });

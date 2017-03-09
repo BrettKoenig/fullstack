@@ -19,6 +19,8 @@ export class TeamsPage {
     let selectedTourney = this.navParams.data;
 
     this.teams = selectedTourney.standings;
+    console.log("TEAMS")
+    console.log(this.teams)
     
     this.Api.setCurrentTournament(selectedTourney);
   }

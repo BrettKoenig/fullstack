@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import * as _ from 'lodash';
 
@@ -16,47 +16,66 @@ import { Api } from '../../shared/shared';
 })
 export class TeamDetailPage {
   team: any;
-  games:any[];
+  games: any[];
   private tourneyData: any;
+  allGames: any[];
 
-  constructor(private navCtrl: NavController, private navParams: NavParams, private Api: Api) {}
+  constructor(private navCtrl: NavController, private navParams: NavParams, private Api: Api, private LoadingController: LoadingController) { }
 
   ionViewDidLoad() {
     this.team = this.navParams.data;
     this.tourneyData = this.Api.getCurrentTournament();
+
     //need to load in team with teamId
     this.games = _.chain(this.tourneyData.games)
-                  .filter(g => g.team1Id === this.team.teamId || g.team2Id === this.team.teamId)
-                  .value();
+      .filter(g => g.team1Id === this.team.teamId || g.team2Id === this.team.teamId)
+      .map(g => {
+        let isTeam1 = (g.team1Id === this.team.teamId);
+        let opponentName = isTeam1 ? g.team2Id : g.team1Id;
+        let scoreDisplay = this.getScoreDisplay(isTeam1, g.team1Score, g.team2Score);
+        return {
+          gameId: g.gameId,
+          opponent: opponentName,
+          time: Date.parse(g.time),
+          location: g.location,
+          locationUrl: g.locationUrl,
+          scoreDisplay: scoreDisplay,
+          homeAway: (isTeam1 ? "vs." : "at")
+        };
+      })
+      .value();
 
-                  console.log("GAMES")
-                  console.log(this.games)
+    // console.log("GAMES")
+    // console.log(this.games)
+
+    // let loader = this.LoadingController.create({
+    //   content: 'Getting tournaments...'
+    // });
+
+    // loader.present().then(() => {
+    //   this.Api.getTeamById().subscribe(data => {
+    //     this.tournaments = data;
+    //     loader.dismiss();
+    //   });
+    // });
   }
 
-  getScoreDisplay(isTeam1, team1Score, team2Score){
-    if(team1Score && team2Score) {
+  // getTeamById(teamId) {
+  //   this.Api.getTeamById(teamId).subscribe(data => {
+  //     return data;
+  //   });
+  // }
+
+  getScoreDisplay(isTeam1, team1Score, team2Score) {
+    if (team1Score && team2Score) {
       var teamScore = (isTeam1 ? team1Score : team2Score);
       var opponentScore = (isTeam1 ? team2Score : team1Score);
       var winIndicator = teamScore > opponentScore ? "W: " : "L: ";
       return winIndicator + teamScore + "-" + opponentScore;
-    }else{
+    } else {
       return "";
     }
   }
 
 
 }
-// .map(g => {
-//                     let isTeam1 = (g.team1Id === this.team.teamId);
-//                     let opponentName = isTeam1 ? g.team2 : g.team1;
-//                     let scoreDisplay = this.getScoreDisplay(isTeam1, g.team1Score, g.team2Score);
-//                     return {
-//                       gameId: g.gameId,
-//                       opponent: opponentName,
-//                       time: Date.parse(g.time),
-//                       location: g.location,
-//                       locationUrl: g.locationUrl,
-//                       scoreDisplay: scoreDisplay,
-//                       homeAway: (isTeam1 ? "vs." : "at")
-//                     };
-//                   })

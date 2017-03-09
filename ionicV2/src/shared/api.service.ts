@@ -22,6 +22,13 @@ export class Api {
         })
     }
 
+    getTeamById(teamId) : Observable<any>{
+        return this.http.get(`${this.baseUrl}/api/Teams/${teamId}`).map((response:Response) => {
+            console.log(response.json())
+            return response.json();
+        })
+    }
+
     setCurrentTournament(tournament){
         this.currentTournament = tournament
     }
