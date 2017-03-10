@@ -28,8 +28,7 @@ namespace Api.Controllers
         {
             try
             {
-                var tournaments = _tournamentRepository.Retrieve();
-                return Ok(tournaments);
+                return Ok(_tournamentRepository.Retrieve());
             }
             catch (Exception e)
             {
@@ -37,18 +36,18 @@ namespace Api.Controllers
             }
         }
 
-        //[ResponseType(typeof(Team))]
-        //public IHttpActionResult GetTeamsInTournament(int id)
-        //{
-        //    try
-        //    {
-        //        return Ok(_tournamentRepository.GetTeamsInTournament(id));
-        //    }
-        //    catch(Exception e)
-        //    {
-        //        return InternalServerError(e);
-        //    }
-        //}
-        
+        [ResponseType(typeof(Tournament))]
+        public IHttpActionResult Get(int id)
+        {
+            try
+            {
+                return Ok(_tournamentRepository.Retrieve(id));
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+        }
+
     }
 }

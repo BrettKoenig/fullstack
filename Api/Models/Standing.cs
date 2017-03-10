@@ -27,11 +27,11 @@ namespace Api.Models
         public int PointsFor { get; set; }
         public int PointsAgainst { get; set; }
         public int PointsDifferential { get; set; }
-        public Division Division { get; set; }
         public int DivisionId { get; set; }
-        public Tournament Tournament { get; set; }
         public int TournamentId { get; set; }
 
         public virtual Team Team { get; set; }
+        public virtual Tournament Tournament { get; set; }
+        public virtual Division Division { get; set; }
     }
 }
