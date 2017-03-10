@@ -21,6 +21,7 @@ export class TeamHomePage {
   }
 
   goHome(){
+    console.log("tap")
     //this.navCtrl.push(MyTeamsPage);
     this.navCtrl.popToRoot();
   }
