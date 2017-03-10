@@ -288,6 +288,10 @@
     <Compile Include="Migrations\201703102014163_ChangingWinsLossesPointsForPointsAgainstToDbCalculatedFunctions.Designer.cs">
       <DependentUpon>201703102014163_ChangingWinsLossesPointsForPointsAgainstToDbCalculatedFunctions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703102035599_RestrictingSetOnColumns.cs" />
+    <Compile Include="Migrations\201703102035599_RestrictingSetOnColumns.Designer.cs">
+      <DependentUpon>201703102035599_RestrictingSetOnColumns.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -384,6 +388,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703102014163_ChangingWinsLossesPointsForPointsAgainstToDbCalculatedFunctions.resx">
       <DependentUpon>201703102014163_ChangingWinsLossesPointsForPointsAgainstToDbCalculatedFunctions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703102035599_RestrictingSetOnColumns.resx">
+      <DependentUpon>201703102035599_RestrictingSetOnColumns.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
