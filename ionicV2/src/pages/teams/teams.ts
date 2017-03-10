@@ -19,14 +19,11 @@ export class TeamsPage {
     let selectedTourney = this.navParams.data;
 
     this.teams = selectedTourney.standings;
-    console.log("TEAMS")
-    console.log(this.teams)
     
     this.Api.setCurrentTournament(selectedTourney);
   }
 
   itemTapped($event, team) {
-    console.log(team)
     this.navCtrl.push(TeamDetailPage, team);
   }
 }

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
-import * as _ from 'lodash';
+import _ from 'lodash';
 
+import { GamePage } from '../pages';
 import { Api } from '../../shared/shared';
 /*
   Generated class for the TeamDetail page.
@@ -26,7 +27,6 @@ export class TeamDetailPage {
     this.team = this.navParams.data;
     this.tourneyData = this.Api.getCurrentTournament();
 
-    //need to load in team with teamId
     this.games = _.chain(this.tourneyData.games)
       .filter(g => g.team1Id === this.team.teamId || g.team2Id === this.team.teamId)
       .map(g => {
@@ -57,5 +57,9 @@ export class TeamDetailPage {
     }
   }
 
+  gameClicked($event, game){
+    let sourceGame = this.tourneyData.games.find(g => g.gameId === game.gameId);
+    this.navCtrl.push(GamePage, sourceGame);
+  }
 
 }
