@@ -11,8 +11,8 @@ namespace Api.Models
         public int StandingId { get; set; }
         [ForeignKey("Team")]
         public int? TeamId { get; set; }
-        public int Wins { get; set; }
-        public int Losses { get; set; }
+        public int Wins { get; }
+        public int Losses { get; }
         public Decimal WinningPercentange
         {
             get
@@ -24,9 +24,17 @@ namespace Api.Models
                 return 0;
             }
         }
-        public int PointsFor { get; set; }
-        public int PointsAgainst { get; set; }
-        public int PointsDifferential { get; set; }
+        public int PointsFor { get; }
+        public int PointsAgainst { get; }
+
+        public int PointsDifferential
+        {
+            get
+            {
+                return PointsFor - PointsAgainst;
+            }
+        }
+
         public int DivisionId { get; set; }
         public int TournamentId { get; set; }
 

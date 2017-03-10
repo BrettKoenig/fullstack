@@ -17,6 +17,7 @@ import { Api } from '../../shared/shared';
 })
 export class TeamDetailPage {
   team: any;
+  teamStanding: any;
   games: any[];
   private tourneyData: any;
   allGames: any[];
@@ -24,9 +25,9 @@ export class TeamDetailPage {
   constructor(private navCtrl: NavController, private navParams: NavParams, private Api: Api, private LoadingController: LoadingController) { }
 
   ionViewDidLoad() {
-    this.team = this.navParams.data;
+    this.team = this.navParams.data.team;
     this.tourneyData = this.Api.getCurrentTournament();
-
+    
     this.games = _.chain(this.tourneyData.games)
       .filter(g => g.team1Id === this.team.teamId || g.team2Id === this.team.teamId)
       .map(g => {
@@ -44,6 +45,7 @@ export class TeamDetailPage {
         };
       })
       .value();
+      this.teamStanding = _.find(this.tourneyData.standings, {'teamId' :this.team.teamId})
   }
 
   getScoreDisplay(isTeam1, team1Score, team2Score) {

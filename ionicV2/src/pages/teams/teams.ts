@@ -28,7 +28,8 @@ export class TeamsPage {
       this.Api.getTournamentData(selectedTourney.tournamentId).subscribe(data => {
         //get teams from stadings
         this.allTeams = data.standings;
-        console.log(this.allTeams);
+
+        this.Api.setCurrentTournament(selectedTourney);
         this.allTeamDivisions = _.chain(data.standings)
           .groupBy('division.name')
           .toPairs()
@@ -42,8 +43,6 @@ export class TeamsPage {
     });
 
     // this.teams = selectedTourney.standings;
-
-    // this.Api.setCurrentTournament(selectedTourney);
   }
 
   itemTapped($event, team) {

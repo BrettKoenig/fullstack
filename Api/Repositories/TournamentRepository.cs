@@ -15,11 +15,9 @@ namespace Api.Repositories
     public class TournamentRepository : ITournamentRepository
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        private ITeamRepository _teamRepository;
 
-        public TournamentRepository(ITeamRepository teamRepository)
+        public TournamentRepository()
         {
-            _teamRepository = teamRepository;
         }
 
         /// <summary>
