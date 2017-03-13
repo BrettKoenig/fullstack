@@ -11,8 +11,10 @@ namespace Api.Models
         public int StandingId { get; set; }
         [ForeignKey("Team")]
         public int? TeamId { get; set; }
-        public int Wins { get; }
-        public int Losses { get; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public int Wins { get; private set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public int Losses { get; private set; }
         public Decimal WinningPercentange
         {
             get
@@ -24,8 +26,10 @@ namespace Api.Models
                 return 0;
             }
         }
-        public int PointsFor { get; }
-        public int PointsAgainst { get; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public int PointsFor { get; private set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public int PointsAgainst { get; private set; }
 
         public int PointsDifferential
         {

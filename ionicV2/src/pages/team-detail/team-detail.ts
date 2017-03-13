@@ -46,6 +46,8 @@ export class TeamDetailPage {
       })
       .value();
       this.teamStanding = _.find(this.tourneyData.standings, {'teamId' :this.team.teamId})
+      console.log(this.teamStanding)
+      console.log("STANDING")
   }
 
   getScoreDisplay(isTeam1, team1Score, team2Score) {

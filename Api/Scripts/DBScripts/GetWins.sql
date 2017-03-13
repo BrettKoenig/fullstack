@@ -8,6 +8,20 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
+IF EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID(N'[dbo].[Standings]') AND name = 'Wins')
+BEGIN
+	ALTER TABLE [dbo].[Standings]
+	DROP COLUMN Wins
+END
+go
+
+if (OBJECT_ID('dbo.GetWins') is not null)
+begin
+	drop function dbo.GetWins
+end
+go
+
+
 
 CREATE function [dbo].[GetWins](@TeamId int)
 returns int
@@ -22,12 +36,7 @@ begin
 	
 	return @ReturnValue1
 end
-
 GO
-
-alter table [dbo].[Standings]
-drop column Wins
-go
 
 alter table [dbo].[Standings]
 add Wins as  [dbo].[GetWins](TeamId)

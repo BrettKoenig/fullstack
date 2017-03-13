@@ -8,6 +8,19 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
+IF EXISTS (SELECT * FROM   sys.columns WHERE  object_id = OBJECT_ID(N'[dbo].[Standings]') AND name = 'Losses')
+BEGIN
+	ALTER TABLE [dbo].[Standings] 
+	DROP COLUMN Losses
+END
+go
+
+if (OBJECT_ID('dbo.GetLosses') is not null)
+begin
+	drop function dbo.GetLosses
+end
+go
+
 
 CREATE function [dbo].[GetLosses](@TeamId int)
 returns int
@@ -24,10 +37,6 @@ begin
 end
 
 GO
-
-alter table [dbo].[Standings]
-drop column Losses
-go
 
 alter table [dbo].[Standings]
 add Losses as  [dbo].[GetLosses](TeamId)

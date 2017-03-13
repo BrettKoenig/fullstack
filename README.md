@@ -8,8 +8,45 @@ $ref and $id back in json response = http://stackoverflow.com/questions/19308992
 
 Angular2 async loading variables in view = http://stackoverflow.com/questions/34833358/angular-2-typeerror-l-thing0-is-undefined-in-thing-title-in-appcomponent/34833436#34833436
 
+To get database set up run all migrations and then run the 4 db scripts in Api/Scripts/DBScripts
 
-For CORS on backend can <system.webServer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+For CORS on backend on other projects <system.webServer>
     <httpProtocol>
       <customHeaders>
         <add name="Access-Control-Allow-Origin" value="http://localhost:8100" />
