@@ -14,8 +14,6 @@ export class TeamHomePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.team = this.navParams.data;
-    //when come from my-teams it needs to be this.team.name
-    //when come from teams it is this.team.team.name
   }
 
   ionViewDidLoad() {

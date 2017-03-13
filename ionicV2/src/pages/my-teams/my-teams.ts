@@ -16,7 +16,6 @@ export class MyTeamsPage {
   constructor(private navCtrl: NavController, private navParams: NavParams, private loadingController: LoadingController, private Api:Api, private UserSettings:UserSettings) { }
 
   ionViewDidLoad() {
-    //console.log('ionViewDidLoad MyTeamsPage');
   }
 
   goToTournaments() {
@@ -24,7 +23,6 @@ export class MyTeamsPage {
   }
 
   favoriteTapped($event, favorite){
-    console.log("TEAM FROM MY TEAMS HA:",favorite)
     let loader = this.loadingController.create({
       content: 'Getting data...',
       dismissOnPageChange: true
@@ -35,7 +33,6 @@ export class MyTeamsPage {
       this.Api.setCurrentTournament(t);
       this.navCtrl.push(TeamHomePage, favorite);
     });
-    //this.navCtrl.push(TeamHomePage, favorite);
   }
 
   ionViewDidEnter(){

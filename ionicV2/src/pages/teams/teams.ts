@@ -37,7 +37,6 @@ export class TeamsPage {
           .value();
 
         this.teams = this.allTeamDivisions;
-        console.log('division teams', this.teams);
         loader.dismiss();
       });
     });
@@ -46,7 +45,6 @@ export class TeamsPage {
   }
 
   itemTapped($event, team) {
-    console.log("TEAM FROM TEAMS:", team);
     this.navCtrl.push(TeamHomePage, team);
   }
 }
