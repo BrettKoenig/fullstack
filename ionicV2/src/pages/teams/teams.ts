@@ -46,6 +46,7 @@ export class TeamsPage {
   }
 
   itemTapped($event, team) {
+    console.log("TEAM FROM TEAMS:", team);
     this.navCtrl.push(TeamHomePage, team);
   }
 }

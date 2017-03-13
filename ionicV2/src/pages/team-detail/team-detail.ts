@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { AlertController, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { AlertController, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 
 import _ from 'lodash';
 import * as moment from 'moment';
 
 import { GamePage } from '../pages';
-import { Api } from '../../shared/shared';
+import { Api, UserSettings } from '../../shared/shared';
 /*
   Generated class for the TeamDetail page.
 
@@ -26,7 +26,7 @@ export class TeamDetailPage {
   useDateFilter = false;
   isFollowing = false;
 
-  constructor(private navCtrl: NavController, private navParams: NavParams, private Api: Api, private LoadingController: LoadingController, private AlertController: AlertController) { }
+  constructor(private navCtrl: NavController, private navParams: NavParams, private Api: Api, private LoadingController: LoadingController, private AlertController: AlertController, private ToastController: ToastController, private UserSettings: UserSettings ) { }
 
   ionViewDidLoad() {
     this.team = this.navParams.data.team;
@@ -51,6 +51,7 @@ export class TeamDetailPage {
       .value();
     this.allGames = this.games;
     this.teamStanding = _.find(this.tourneyData.standings, { 'teamId': this.team.teamId })
+    this.UserSettings.isFavoriteTeam(this.teamStanding).then(value => this.isFollowing = value);
   }
 
   getScoreDisplay(isTeam1, team1Score, team2Score) {
@@ -92,7 +93,15 @@ export class TeamDetailPage {
           text: 'Yes',
           handler: () => {
             this.isFollowing = false;
-            //persist data to db
+            
+            this.UserSettings.unfavoriteTeam(this.teamStanding);
+
+            let toast = this.ToastController.create({
+              message: 'You have unfollowed this team.',
+              duration: 2000,
+              position: 'bottom'
+            });
+            toast.present();
           }
         },
         {
@@ -103,7 +112,7 @@ export class TeamDetailPage {
       confirm.present();
     }else{
       this.isFollowing = true;
-      //persist data to db
+      this.UserSettings.favoriteTeam(this.teamStanding);
     }
   }
 }

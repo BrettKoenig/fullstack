@@ -14,16 +14,14 @@ export class TeamHomePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.team = this.navParams.data;
-    console.log("H:", this.team.team.name)
+    //when come from my-teams it needs to be this.team.name
+    //when come from teams it is this.team.team.name
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TeamHomePage');
   }
 
   goHome(){
-    console.log("tap")
-    //this.navCtrl.push(MyTeamsPage);
     this.navCtrl.popToRoot();
   }
 

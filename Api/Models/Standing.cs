@@ -15,15 +15,15 @@ namespace Api.Models
         public int Wins { get; private set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public int Losses { get; private set; }
-        public Decimal WinningPercentange
+        public string WinningPercentage
         {
             get
             {
                 if ((Wins + Losses) > 0)
                 {
-                    return Wins / (Wins + Losses);
+                    return string.Format("{0:0.000}", (double)Wins / (double)(Wins + Losses));
                 }
-                return 0;
+                return "0.00";
             }
         }
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]

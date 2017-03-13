@@ -296,6 +296,14 @@
     <Compile Include="Migrations\201703131310066_addingComputedFields.Designer.cs">
       <DependentUpon>201703131310066_addingComputedFields.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703131605117_renamingWinningPercentage.cs" />
+    <Compile Include="Migrations\201703131605117_renamingWinningPercentage.Designer.cs">
+      <DependentUpon>201703131605117_renamingWinningPercentage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703131607289_renamingWinningPercentageCorrectly.cs" />
+    <Compile Include="Migrations\201703131607289_renamingWinningPercentageCorrectly.Designer.cs">
+      <DependentUpon>201703131607289_renamingWinningPercentageCorrectly.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -398,6 +406,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703131310066_addingComputedFields.resx">
       <DependentUpon>201703131310066_addingComputedFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703131605117_renamingWinningPercentage.resx">
+      <DependentUpon>201703131605117_renamingWinningPercentage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703131607289_renamingWinningPercentageCorrectly.resx">
+      <DependentUpon>201703131607289_renamingWinningPercentageCorrectly.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

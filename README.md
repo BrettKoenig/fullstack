@@ -14,7 +14,9 @@ To get database set up run all migrations and then run the 4 db scripts in Api/S
 
 
 
-
+installed local storage with: npm install @ionic/storage --save --save-exact
+local storage is for temp data, the phone may clean it up at any team
+sql lite for persisted data on phone
 
 
 
