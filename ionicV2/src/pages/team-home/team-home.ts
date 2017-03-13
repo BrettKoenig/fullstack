@@ -14,6 +14,7 @@ export class TeamHomePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.team = this.navParams.data;
+    console.log("H:", this.team.team.name)
   }
 
   ionViewDidLoad() {

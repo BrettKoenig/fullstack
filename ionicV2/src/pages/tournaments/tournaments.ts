@@ -21,8 +21,6 @@ export class TournamentsPage {
     loader.present().then(() => {
       this.Api.getTournaments().subscribe(data => {
         this.tournaments = data;
-        console.log("Boom");
-        console.log(data)
         loader.dismiss();
       });
     });

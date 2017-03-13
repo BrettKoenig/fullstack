@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { AlertController, NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import _ from 'lodash';
+import * as moment from 'moment';
 
 import { GamePage } from '../pages';
 import { Api } from '../../shared/shared';
@@ -16,18 +17,21 @@ import { Api } from '../../shared/shared';
   templateUrl: 'team-detail.html'
 })
 export class TeamDetailPage {
+  dateFilter: string;
   team: any;
   teamStanding: any;
   games: any[];
   private tourneyData: any;
   allGames: any[];
+  useDateFilter = false;
+  isFollowing = false;
 
-  constructor(private navCtrl: NavController, private navParams: NavParams, private Api: Api, private LoadingController: LoadingController) { }
+  constructor(private navCtrl: NavController, private navParams: NavParams, private Api: Api, private LoadingController: LoadingController, private AlertController: AlertController) { }
 
   ionViewDidLoad() {
     this.team = this.navParams.data.team;
     this.tourneyData = this.Api.getCurrentTournament();
-    
+
     this.games = _.chain(this.tourneyData.games)
       .filter(g => g.team1Id === this.team.teamId || g.team2Id === this.team.teamId)
       .map(g => {
@@ -45,9 +49,8 @@ export class TeamDetailPage {
         };
       })
       .value();
-      this.teamStanding = _.find(this.tourneyData.standings, {'teamId' :this.team.teamId})
-      console.log(this.teamStanding)
-      console.log("STANDING")
+    this.allGames = this.games;
+    this.teamStanding = _.find(this.tourneyData.standings, { 'teamId': this.team.teamId })
   }
 
   getScoreDisplay(isTeam1, team1Score, team2Score) {
@@ -61,9 +64,46 @@ export class TeamDetailPage {
     }
   }
 
-  gameClicked($event, game){
+  gameClicked($event, game) {
     let sourceGame = this.tourneyData.games.find(g => g.gameId === game.gameId);
     this.navCtrl.push(GamePage, sourceGame);
   }
+  getScoreWorL(game) {
+    return game.scoreDisplay ? game.scoreDisplay[0] : '';
+  }
 
+  getScoreDisplayBadgeClass(game) {
+    return game.scoreDisplay.indexOf('W:') === 0 ? 'primary' : 'danger';
+  }
+  dateChanged() {
+    if (this.useDateFilter) {
+      this.games = _.filter(this.allGames, g => moment(g.time).isSame(this.dateFilter, 'day'));
+    } else {
+      this.games = this.allGames;
+    }
+  }
+
+  toggleFollow(){
+    if(this.isFollowing){
+      let confirm = this.AlertController.create({
+        title: 'Unfollow?',
+        message: 'Are you sure you want to unfollow?',
+        buttons: [{
+          text: 'Yes',
+          handler: () => {
+            this.isFollowing = false;
+            //persist data to db
+          }
+        },
+        {
+          text: 'No'
+        }
+        ]
+      });
+      confirm.present();
+    }else{
+      this.isFollowing = true;
+      //persist data to db
+    }
+  }
 }

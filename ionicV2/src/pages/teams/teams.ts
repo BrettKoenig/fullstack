@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import _ from 'lodash';
-import { TeamDetailPage } from '../pages';
+import { TeamHomePage } from '../pages';
 import { Api } from '../../shared/shared';
 
 @Component({
@@ -46,6 +46,6 @@ export class TeamsPage {
   }
 
   itemTapped($event, team) {
-    this.navCtrl.push(TeamDetailPage, team);
+    this.navCtrl.push(TeamHomePage, team);
   }
 }
