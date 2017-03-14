@@ -54,7 +54,6 @@ export class TeamsPage {
     let filteredTeams = [];
 
     _.forEach(this.allTeamDivisions, td => {
-      console.log("hey:", td.divisionTeams)
       let teams = _.filter(td.divisionTeams, t => (<any>t).team.name.toLowerCase().includes(queryTextLower));
       if(teams.length){
         filteredTeams.push({divisionName: td.divisionName, divisionTeams: teams});

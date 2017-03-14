@@ -25,14 +25,19 @@ export class StandingsPage {
     let tourneyData = this.Api.getCurrentTournament();
     this.standings = tourneyData.standings;
 
-    this.allStandings = _.chain(this.standings)
-    .groupBy('division.name')
-    .toPairs()
-    .map(item => _.zipObject(['divisionName', 'divisionTeams'], item))
-    .value();
+    // this.allStandings = _.chain(this.standings)
+    // .groupBy('division.name')
+    // .toPairs()
+    // .map(item => _.zipObject(['divisionName', 'divisionTeams'], item))
+    // .value();
 
-    console.log('standings: ', this.standings);
-    console.log('division standings', this.allStandings);
+  }
+
+  getHeader(record, recordIndex, records){
+    if(recordIndex === 0 || record.division !== records[recordIndex-1].division){
+      return record.division;
+    }
+    return null;
   }
 
 }
