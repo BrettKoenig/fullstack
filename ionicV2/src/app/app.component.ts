@@ -3,15 +3,16 @@ import { Nav, Platform, LoadingController, Events } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { HttpModule } from '@angular/http';
 
-import { MyTeamsPage, TournamentsPage, TeamHomePage } from '../pages/pages';
-import { Api, UserSettings } from '../shared/shared';
+import { MyTeamsPage, TournamentsPage, TeamHomePage, LoginPage } from '../pages/pages';
+import { Api, UserSettings, AuthService } from '../shared/shared';
 
 @Component({
   templateUrl: 'app.html',
   providers: [
     Api,
     UserSettings,
-    HttpModule
+    HttpModule,
+    AuthService
   ]
 })
 export class MyApp {
@@ -19,7 +20,8 @@ export class MyApp {
 
   favoriteTeams: any[];
 
-  rootPage: any = MyTeamsPage;
+  rootPage: any = LoginPage;
+  //was MyTeamsPage
 
   pages: Array<{title: string, component: any}>;
 

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
-import { TournamentsPage, TeamHomePage } from '../pages';
+import { TournamentsPage, TeamHomePage, LoginPage } from '../pages';
 
-import { Api, UserSettings } from '../../shared/shared';
+import { Api, UserSettings, AuthService } from '../../shared/shared';
 
 @Component({
   selector: 'page-my-teams',
@@ -12,8 +12,14 @@ import { Api, UserSettings } from '../../shared/shared';
 export class MyTeamsPage {
 
   favorites = [];
+  username = '';
+  email = '';
 
-  constructor(private navCtrl: NavController, private navParams: NavParams, private loadingController: LoadingController, private Api:Api, private UserSettings:UserSettings) { }
+  constructor(private navCtrl: NavController, private navParams: NavParams, private loadingController: LoadingController, private Api:Api, private UserSettings:UserSettings, private AuthService:AuthService) {
+    let info = this.AuthService.getUserInfo();
+    this.username = info.name;
+    this.email = info.email;
+   }
 
   ionViewDidLoad() {
   }
@@ -37,6 +43,12 @@ export class MyTeamsPage {
 
   ionViewDidEnter(){
     this.favorites = this.UserSettings.getAllFavorites();
+  }
+
+  public logout() {
+    this.AuthService.logout().subscribe(succ => {
+        this.navCtrl.setRoot(LoginPage)
+    });
   }
 
 }
