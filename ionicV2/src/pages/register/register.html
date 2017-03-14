@@ -19,6 +19,10 @@
             <ion-item>
               <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
             </ion-item>
+
+            <ion-item>
+              <ion-input type="password" placeholder="Confirm Password" name="confirmPassword" [(ngModel)]="registerCredentials.confirmPassword" required></ion-input>
+            </ion-item>
             
           </ion-list>
         </ion-col>
@@ -26,7 +30,7 @@
       
       <ion-row>
         <ion-col class="signup-col">
-          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Register</button>
+          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid || registerCredentials.password!==registerCredentials.confirmPassword">Register</button>
         </ion-col>
       </ion-row>
       

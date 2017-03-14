@@ -22,12 +22,6 @@ export class Api {
         })
     }
 
-    // getTournamentData(tournamentId) : Observable<any>{
-    //     return this.http.get(`${this.baseUrl}/api/Tournaments/${tournamentId}`).map((response:Response) => {
-    //         return response.json();
-    //     })
-    // }
-
     getTournamentData(tournamentId, forceRefresh: boolean = false) : Observable<any>{
         if(!forceRefresh && this.tournamentData[tournamentId]){
             this.currentTournament = this.tournamentData[tournamentId];
