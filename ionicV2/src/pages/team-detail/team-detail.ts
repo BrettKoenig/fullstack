@@ -115,4 +115,11 @@ export class TeamDetailPage {
       this.UserSettings.favoriteTeam(this.teamStanding);
     }
   }
+
+  refreshAll(refresher){
+    this.Api.refreshCurrentTournament().subscribe(() => {
+      refresher.complete();
+      this.ionViewDidLoad();
+    })
+  }
 }

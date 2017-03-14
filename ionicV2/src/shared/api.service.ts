@@ -10,6 +10,7 @@ export class Api {
     private baseUrl = 'http://localhost:58352';
 
     currentTournament: any = {};
+    private tournamentData = {};
 
     constructor(private http: Http) {
 
@@ -21,9 +22,21 @@ export class Api {
         })
     }
 
-    getTournamentData(tournamentId) : Observable<any>{
+    // getTournamentData(tournamentId) : Observable<any>{
+    //     return this.http.get(`${this.baseUrl}/api/Tournaments/${tournamentId}`).map((response:Response) => {
+    //         return response.json();
+    //     })
+    // }
+
+    getTournamentData(tournamentId, forceRefresh: boolean = false) : Observable<any>{
+        if(!forceRefresh && this.tournamentData[tournamentId]){
+            this.currentTournament = this.tournamentData[tournamentId];
+            return Observable.of(this.currentTournament);
+        }
         return this.http.get(`${this.baseUrl}/api/Tournaments/${tournamentId}`).map((response:Response) => {
-            return response.json();
+            this.tournamentData[tournamentId] = response.json();
+            this.currentTournament = this.tournamentData[tournamentId];
+            return this.currentTournament;
         })
     }
 
@@ -39,5 +52,9 @@ export class Api {
 
     getCurrentTournament(){
         return this.currentTournament;
+    }
+
+    refreshCurrentTournament(){
+        return this.getTournamentData(this.currentTournament.tournamentId, true)
     }
 }
