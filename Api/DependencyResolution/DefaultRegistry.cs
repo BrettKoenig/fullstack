@@ -17,6 +17,12 @@
 
 namespace Api.DependencyResolution {
     using Interfaces.Repositories;
+    using Microsoft.Owin.Security;
+    using Microsoft.Owin.Security.DataHandler;
+    using Microsoft.Owin.Security.DataHandler.Encoder;
+    using Microsoft.Owin.Security.DataHandler.Serializer;
+    using Microsoft.Owin.Security.DataProtection;
+    using Models;
     using Repositories;
     using StructureMap.Configuration.DSL;
     using StructureMap.Graph;
@@ -31,6 +37,13 @@ namespace Api.DependencyResolution {
                     scan.WithDefaultConventions();
                 });
             For<ITournamentRepository>().Use<TournamentRepository>();
+            For<ISecureDataFormat<AuthenticationTicket>>().Use<SecureDataFormat<AuthenticationTicket>>();
+            For<IDataSerializer<AuthenticationTicket>>().Use<TicketSerializer>();
+            For<IDataProtector>().Use(() => new DpapiDataProtectionProvider().Create("ASP.NET Identity"));
+            For<ITextEncoder>().Use<Base64UrlTextEncoder>();
+
+            For<Microsoft.AspNet.Identity.IUserStore<ApplicationUser>>().Use<Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>>();
+            For<System.Data.Entity.DbContext>().Use(() => new ApplicationDbContext());
         }
 
         #endregion
