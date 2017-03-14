@@ -9,7 +9,9 @@
   <ion-navbar color="primary">
     <ion-title>Teams</ion-title>
   </ion-navbar>
-
+<ion-toolbar color="secondary">
+    <ion-searchbar placeholder="Search" [(ngModel)]="queryText" (ionInput)="updateTeams($event)"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 
