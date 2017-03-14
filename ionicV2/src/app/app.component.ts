@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, LoadingController } from 'ionic-angular';
+import { Nav, Platform, LoadingController, Events } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { HttpModule } from '@angular/http';
 
@@ -23,7 +23,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, private UserSettings: UserSettings, private LoadingController:LoadingController, private Api:Api) {
+  constructor(public platform: Platform, private UserSettings: UserSettings, private LoadingController:LoadingController, private Api:Api, private Events:Events) {
     this.initializeApp();
 
   }
@@ -35,6 +35,8 @@ export class MyApp {
       StatusBar.styleDefault();
       this.refreshFavorites();
       Splashscreen.hide();
+
+      this.Events.subscribe('favorites:changed', () => this.refreshFavorites());
     });
   }
 
