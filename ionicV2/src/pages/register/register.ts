@@ -12,18 +12,19 @@ export class RegisterPage {
  
   constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController) {}
  
-  public register() {
+  register() {
     this.auth.register(this.registerCredentials).subscribe(success => {
       if (success) {
-        this.createSuccess = true;
-          this.showPopup("Success", "Account created.");
+        //this.createSuccess = true;
+          //this.showPopup("Success", "Account created.");
       } else {
-        this.showPopup("Error", "Problem creating account.");
+        //this.showPopup("Error", "Problem creating account.");
       }
     },
-    error => {
-      this.showPopup("Error", error);
-    });
+    // error => {
+    //   //this.showPopup("Error", error);
+    // }
+    );
   }
  
   showPopup(title, text) {
