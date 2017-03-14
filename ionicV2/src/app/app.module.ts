@@ -1,9 +1,11 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { Storage } from '@ionic/storage';
+import { AgmCoreModule } from 'angular2-google-maps/core';
 
-import { MyTeamsPage, TournamentsPage, TeamsPage, TeamDetailPage, TeamHomePage, StandingsPage, GamePage } from '../pages/pages';
+import { MyTeamsPage, TournamentsPage, TeamsPage, TeamDetailPage, TeamHomePage, StandingsPage, GamePage, MapPage } from '../pages/pages';
 
 @NgModule({
   declarations: [
@@ -14,10 +16,13 @@ import { MyTeamsPage, TournamentsPage, TeamsPage, TeamDetailPage, TeamHomePage, 
     TeamDetailPage,
     TeamHomePage,
     StandingsPage,
-    GamePage
+    GamePage,
+    MapPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpModule,
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyBbsOlMryAHu2ESwHHSwrDBIUU7fiENNoM'})
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -28,7 +33,8 @@ import { MyTeamsPage, TournamentsPage, TeamsPage, TeamDetailPage, TeamHomePage, 
     TeamDetailPage,
     TeamHomePage,
     StandingsPage,
-    GamePage
+    GamePage,
+    MapPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage]
 })

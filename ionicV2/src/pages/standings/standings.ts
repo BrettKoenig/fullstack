@@ -15,10 +15,11 @@ import { Api } from '../../shared/shared';
 })
 export class StandingsPage {
   allStandings: any[];
+  divisionFilter = 'division';
   standings: any[];
   team: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private Api: Api) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private Api: Api) { }
 
   ionViewDidLoad() {
     this.team = this.navParams.data;
@@ -31,11 +32,22 @@ export class StandingsPage {
     // .map(item => _.zipObject(['divisionName', 'divisionTeams'], item))
     // .value();
 
+    this.allStandings = tourneyData.standings;
+
+    this.filterDivision();
   }
 
-  getHeader(record, recordIndex, records){
-    if(recordIndex === 0 || record.division !== records[recordIndex-1].division){
-      return record.division;
+  filterDivision() {
+    if (this.divisionFilter === 'all') {
+      this.standings = this.allStandings;
+    } else {
+      this.standings = _.filter(this.allStandings, s => s.division.divisionId === this.team.division.divisionId);
+    }
+  }
+
+  getHeader(record, recordIndex, records) {
+    if (recordIndex === 0 || record.division.divisionId !== records[recordIndex - 1].division.divisionId) {
+      return record.division.name;
     }
     return null;
   }

@@ -16,9 +16,6 @@ export class TeamHomePage {
     this.team = this.navParams.data;
   }
 
-  ionViewDidLoad() {
-  }
-
   goHome(){
     this.navCtrl.popToRoot();
   }

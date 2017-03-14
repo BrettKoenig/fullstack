@@ -3,7 +3,7 @@ import { Nav, Platform, LoadingController, Events } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { HttpModule } from '@angular/http';
 
-import { MyTeamsPage, TournamentsPage, GamePage, TeamHomePage } from '../pages/pages';
+import { MyTeamsPage, TournamentsPage, TeamHomePage } from '../pages/pages';
 import { Api, UserSettings } from '../shared/shared';
 
 @Component({
