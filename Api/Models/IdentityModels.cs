@@ -36,8 +36,6 @@ namespace Api.Models
 
         public System.Data.Entity.DbSet<Location> Locations { get; set; }
 
-        public System.Data.Entity.DbSet<Product> Products { get; set; }
-
         public System.Data.Entity.DbSet<Standing> Standings { get; set; }
 
         public System.Data.Entity.DbSet<Team> Teams { get; set; }
