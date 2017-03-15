@@ -20,16 +20,16 @@ export class Api {
 
     }
 
-    getTournaments(): Observable<any> {
+    private getAuthorizationHeader(){
         let headers = new Headers({ 'Authorization': 'Bearer ' + this.AuthService.currentUser.token });
         let options = new RequestOptions({ headers: headers });
+        return options;
+    }
 
-        return this.http.get(`${this.baseUrl}/api/Tournaments`, options).map((response: Response) => {
+    getTournaments(): Observable<any> {
+        return this.http.get(`${this.baseUrl}/api/Tournaments`, this.getAuthorizationHeader()).map((response: Response) => {
             return response.json();
         })
-        //  return this.http.get(`${this.baseUrl}/api/Tournaments`).map((response: Response) => {
-        //     return response.json();
-        // })
     }
 
     getTournamentData(tournamentId, forceRefresh: boolean = false): Observable<any> {
@@ -37,7 +37,7 @@ export class Api {
             this.currentTournament = this.tournamentData[tournamentId];
             return Observable.of(this.currentTournament);
         }
-        return this.http.get(`${this.baseUrl}/api/Tournaments/${tournamentId}`).map((response: Response) => {
+        return this.http.get(`${this.baseUrl}/api/Tournaments/${tournamentId}`, this.getAuthorizationHeader()).map((response: Response) => {
             this.tournamentData[tournamentId] = response.json();
             this.currentTournament = this.tournamentData[tournamentId];
             return this.currentTournament;
@@ -45,7 +45,7 @@ export class Api {
     }
 
     getTeamById(teamId): Observable<any> {
-        return this.http.get(`${this.baseUrl}/api/Teams/${teamId}`).map((response: Response) => {
+        return this.http.get(`${this.baseUrl}/api/Teams/${teamId}`, this.getAuthorizationHeader()).map((response: Response) => {
             return response.json();
         })
     }
