@@ -28,13 +28,6 @@ export class AuthService {
     if (credentials.email === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
     } else {
-      // return Observable.create(observer => {
-      //   // At this point make a request to your backend to make a real check!
-      //   let access = (credentials.password === "pass" && credentials.email === "email");
-      //   this.currentUser = new User('Simon', 'saimon@devdactic.com');
-      //   observer.next(access);
-      //   observer.complete();
-      // });
       let urlSearchParams = new URLSearchParams();
       urlSearchParams.append('userName', credentials.email);
       urlSearchParams.append('password', credentials.password);
