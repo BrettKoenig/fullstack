@@ -19,7 +19,7 @@ sql lite for persisted data on phone
 
 
 
-For CORS on backend on other projects 
+For CORS on backend
 ```xml
 <system.webServer>
     <httpProtocol>
@@ -30,21 +30,19 @@ For CORS on backend on other projects
         <add name="Access-Control-Allow-Credentials" value="true" />
       </customHeaders>
     </httpProtocol>
-    </system.webServer>
-    ```
-     to web.config
+  </system.webServer>
+```
+to web.config
+and then in global.asax.cs
 
-       and then in global.asax.cs
+    protected void Application_OnBeginRequest()
+    {
+        var res = HttpContext.Current.Response;
+        var req = HttpContext.Current.Request;
 
-       protected void Application_OnBeginRequest()
-       {
-           var res = HttpContext.Current.Response;
-           var req = HttpContext.Current.Request;
-
-           if (req.HttpMethod == "OPTIONS")
-           {
-               res.StatusCode = 200;
-               res.End();
-           }
-       }
-   }
+        if (req.HttpMethod == "OPTIONS")
+        {
+            res.StatusCode = 200;
+            res.End();
+        }
+    }
