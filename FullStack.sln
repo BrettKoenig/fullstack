@@ -7,28 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.UnitTests", "Api.Tests\Api.UnitTests.csproj", "{D60572F1-1B8B-47F9-BEEF-18CB72107E6A}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Angular1", "Angular1\", "{07B2EC09-C382-4B5A-8073-CD266072E320}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.1"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_58397"
-		Debug.AspNetCompiler.PhysicalPath = "Angular1\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58397\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_58397"
-		Release.AspNetCompiler.PhysicalPath = "Angular1\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58397\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "58397"
-		SlnRelativePath = "Angular1\"
-		DefaultWebSiteLanguage = "Visual C#"
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.IntegrationTests", "Api.IntegrationTests\Api.IntegrationTests.csproj", "{8781E16A-9978-4F06-A7E1-E45F9152EA6F}"
 EndProject
 Global
@@ -45,10 +23,6 @@ Global
 		{D60572F1-1B8B-47F9-BEEF-18CB72107E6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D60572F1-1B8B-47F9-BEEF-18CB72107E6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D60572F1-1B8B-47F9-BEEF-18CB72107E6A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{07B2EC09-C382-4B5A-8073-CD266072E320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{07B2EC09-C382-4B5A-8073-CD266072E320}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{07B2EC09-C382-4B5A-8073-CD266072E320}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{07B2EC09-C382-4B5A-8073-CD266072E320}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{8781E16A-9978-4F06-A7E1-E45F9152EA6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8781E16A-9978-4F06-A7E1-E45F9152EA6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8781E16A-9978-4F06-A7E1-E45F9152EA6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
