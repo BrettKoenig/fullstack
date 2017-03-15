@@ -26,12 +26,22 @@ export class AuthService {
     if (credentials.email === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
     } else {
-      return Observable.create(observer => {
-        // At this point make a request to your backend to make a real check!
-        let access = (credentials.password === "pass" && credentials.email === "email");
-        this.currentUser = new User('Simon', 'saimon@devdactic.com');
-        observer.next(access);
-        observer.complete();
+      // return Observable.create(observer => {
+      //   // At this point make a request to your backend to make a real check!
+      //   let access = (credentials.password === "pass" && credentials.email === "email");
+      //   this.currentUser = new User('Simon', 'saimon@devdactic.com');
+      //   observer.next(access);
+      //   observer.complete();
+      // });
+
+      let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlenconded' }); // ... Set content type to JSON
+      let options = new RequestOptions({ headers: headers });
+      // return this.http.post(`${this.baseUrl}/api/Account/Register`, credentials).map((response: Response) => {
+      //   return response;
+      // })
+      return this.http.post(`${this.baseUrl}/Token`, credentials, options).map((response: Response) => {
+        console.log("HEY", response)
+        return response.json();
       });
     }
   }

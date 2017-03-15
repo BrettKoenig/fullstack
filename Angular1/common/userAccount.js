@@ -13,7 +13,7 @@
             registration: $resource(appSettings.serverPath + "/api/Account/Register", null, {
                 'registerUser': {method: 'POST'}
             }),
-            login: $resource(appSettings.serverPath + "/Token", null, {
+            login: $resource(appSettings.serverPath + "Token", null, {
                 'loginUser': {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlenconded' },

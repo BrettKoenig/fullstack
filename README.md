@@ -8,10 +8,9 @@ $ref and $id back in json response = http://stackoverflow.com/questions/19308992
 
 Angular2 async loading variables in view = http://stackoverflow.com/questions/34833358/angular-2-typeerror-l-thing0-is-undefined-in-thing-title-in-appcomponent/34833436#34833436
 
+For http requests with empty body, "unexpected end of JSON input":http://stackoverflow.com/questions/35734411/angular-2-web-api-json-parsing-error-syntax-error-unexpected-end-of-input
+
 To get database set up run all migrations and then run the 4 db scripts in Api/Scripts/DBScripts
-
-
-
 
 
 installed local storage with: npm install @ionic/storage --save --save-exact
