@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import 'rxjs';
 import { Observable } from 'rxjs/Observable';
@@ -52,9 +52,12 @@ export class AuthService {
     if (credentials.email === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
     } else {
-      return this.http.post(`${this.baseUrl}/api/Account/Register`, credentials).map((response: Response) => {
-        return response.json();
-      })
+      // let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+      // let options = new RequestOptions({ headers: headers });
+      // return this.http.post(`${this.baseUrl}/api/Account/Register`, credentials).map((response: Response) => {
+      //   return response;
+      // })
+      return this.http.post(`${this.baseUrl}/api/Account/Register`, credentials);
     }
   }
   // vm.registerUser = function () {
