@@ -39,15 +39,26 @@ export class AuthService {
         let jsonResponse = response.json();
         this.currentUser = new User(jsonResponse.userName, jsonResponse.userName, jsonResponse.access_token);
         return jsonResponse;
+      }).catch((error: any) => {
+        return Observable.throw(error.json().error_description || 'Server error')
       });
     }
   }
-  
+
   public register(credentials): Observable<any> {
     if (credentials.email === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
     } else {
-      return this.http.post(`${this.baseUrl}/api/Account/Register`, credentials);
+      return this.http.post(`${this.baseUrl}/api/Account/Register`, credentials).catch((error: any) => {
+        for (var key in error.json().modelState) {
+          for (var i = 0; i < error.json().modelState[key].length; i++) {
+            if (key != "$id") {
+              return Observable.throw(error.json().modelState[key][i]);
+            }
+          }
+        }
+        return Observable.throw('Server error');
+      });
     }
   }
 

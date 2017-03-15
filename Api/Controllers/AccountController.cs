@@ -402,9 +402,11 @@ namespace Api.Controllers
             {
                 if (result.Errors != null)
                 {
+                    int counter = 0;
                     foreach (string error in result.Errors)
                     {
-                        ModelState.AddModelError("", error);
+                        ModelState.AddModelError(counter.ToString(), error);
+                        counter++;
                     }
                 }
 
