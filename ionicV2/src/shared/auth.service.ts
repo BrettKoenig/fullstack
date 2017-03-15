@@ -25,7 +25,7 @@ export class AuthService {
 
   private baseUrl = this.Constant.getApiUrl();
   currentUser: User;
-  
+
   public login(credentials) {
     if (credentials.email === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
@@ -69,11 +69,17 @@ export class AuthService {
   }
 
   public logout() {
-    //send back to login
     return Observable.create(observer => {
+      this.http.post(`${this.baseUrl}/api/Account/Logout`, null, this.getAuthorizationHeader());
       this.currentUser = null;
       observer.next(true);
       observer.complete();
     });
+  }
+
+  private getAuthorizationHeader() {
+    let headers = new Headers({ 'Authorization': 'Bearer ' + this.currentUser.token });
+    let options = new RequestOptions({ headers: headers });
+    return options;
   }
 }
