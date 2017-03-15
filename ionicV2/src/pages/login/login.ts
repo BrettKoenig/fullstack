@@ -45,13 +45,7 @@ export class LoginPage {
     setTimeout(() => {
       this.loading.dismiss();
     });
-
-    // let alert = this.alertCtrl.create({
-    //   title: 'Fail',
-    //   subTitle: text,
-    //   buttons: ['OK']
-    // });
-    // alert.present(prompt);
+    
     let toast = this.toastController.create({
       message: text,
       duration: 2000,
