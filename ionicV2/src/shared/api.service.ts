@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 
 import { AuthService } from './auth.service';
+import { Constant } from './constant.service';
 
 import 'rxjs';
 import { Observable } from 'rxjs/Observable';
@@ -9,12 +10,12 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class Api {
 
-    private baseUrl = 'http://localhost:58352';
+    private baseUrl = this.Constant.getApiUrl();
 
     currentTournament: any = {};
     private tournamentData = {};
 
-    constructor(private http: Http, private AuthService: AuthService) {
+    constructor(private http: Http, private AuthService: AuthService, private Constant: Constant) {
 
     }
 

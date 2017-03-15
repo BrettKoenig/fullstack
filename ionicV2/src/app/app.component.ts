@@ -4,7 +4,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { HttpModule } from '@angular/http';
 
 import { MyTeamsPage, TournamentsPage, TeamHomePage, LoginPage } from '../pages/pages';
-import { Api, UserSettings, AuthService } from '../shared/shared';
+import { Api, UserSettings, AuthService, Constant } from '../shared/shared';
 
 @Component({
   templateUrl: 'app.html',
@@ -12,7 +12,8 @@ import { Api, UserSettings, AuthService } from '../shared/shared';
     Api,
     UserSettings,
     HttpModule,
-    AuthService
+    AuthService,
+    Constant
   ]
 })
 export class MyApp {

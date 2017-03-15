@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 
+import { Constant } from './constant.service';
+
 import 'rxjs';
 import { Observable } from 'rxjs/Observable';
 
@@ -19,11 +21,11 @@ export class User {
 @Injectable()
 export class AuthService {
 
-  private baseUrl = 'http://localhost:58352';
+  constructor(private http: Http, private Constant: Constant) { }
+
+  private baseUrl = this.Constant.getApiUrl();
   currentUser: User;
-
-  constructor(private http: Http) { }
-
+  
   public login(credentials) {
     if (credentials.email === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
