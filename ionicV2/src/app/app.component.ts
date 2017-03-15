@@ -25,9 +25,8 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, private UserSettings: UserSettings, private LoadingController:LoadingController, private Api:Api, private Events:Events) {
+  constructor(public platform: Platform, private UserSettings: UserSettings, private LoadingController:LoadingController, private Api:Api, private Events:Events, private AuthService: AuthService) {
     this.initializeApp();
-
   }
 
   initializeApp() {
@@ -48,6 +47,12 @@ export class MyApp {
 
   goHome(){
     this.nav.push(MyTeamsPage);
+  }
+  
+  logout() {
+    this.AuthService.logout().subscribe(succ => {
+        this.nav.setRoot(LoginPage)
+    });
   }
 
   goToTeam(favorite){

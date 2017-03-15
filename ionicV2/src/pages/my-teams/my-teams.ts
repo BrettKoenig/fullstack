@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
-import { TournamentsPage, TeamHomePage, LoginPage } from '../pages';
+import { TournamentsPage, TeamHomePage } from '../pages';
 
 import { Api, UserSettings, AuthService } from '../../shared/shared';
 
@@ -43,12 +43,6 @@ export class MyTeamsPage {
 
   ionViewDidEnter(){
     this.favorites = this.UserSettings.getAllFavorites();
-  }
-
-  public logout() {
-    this.AuthService.logout().subscribe(succ => {
-        this.navCtrl.setRoot(LoginPage)
-    });
   }
 
 }

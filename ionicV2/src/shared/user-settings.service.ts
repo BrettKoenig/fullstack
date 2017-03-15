@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import _ from 'lodash';
 
 import { Storage } from '@ionic/storage';
 import { Events } from 'ionic-angular';

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { LoadingController, NavController, NavParams } from 'ionic-angular';
 
-import { MyTeamsPage, TeamsPage } from '../pages';
+import { TeamsPage } from '../pages';
 import { Api } from '../../shared/shared';
 
 @Component({

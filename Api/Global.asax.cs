@@ -17,5 +17,17 @@ namespace Api
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        protected void Application_OnBeginRequest()
+        {
+            var res = HttpContext.Current.Response;
+            var req = HttpContext.Current.Request;
+
+            if (req.HttpMethod == "OPTIONS")
+            {
+                res.StatusCode = 200;
+                res.End();
+            }
+        }
     }
 }
