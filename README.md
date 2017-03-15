@@ -21,15 +21,15 @@ sql lite for persisted data on phone
 
 For CORS on backend on other projects 
 "<system.webServer>
-    <httpProtocol>
-      <customHeaders>
-        <add name="Access-Control-Allow-Origin" value="http://localhost:8100" />
-        <add name="Access-Control-Allow-Methods" value="GET, POST, OPTIONS, PUT, DELETE" />
-        <add name="Access-Control-Allow-Headers" value="Origin, X-Requested-With, Content-Type, Accept, Authorization" />
-        <add name="Access-Control-Allow-Credentials" value="true" />
-      </customHeaders>
-    </httpProtocol>
-    </system.webServer>"
+    "<httpProtocol>
+      "<customHeaders>
+        "<add name="Access-Control-Allow-Origin" value="http://localhost:8100" />
+        "<add name="Access-Control-Allow-Methods" value="GET, POST, OPTIONS, PUT, DELETE" />
+        "<add name="Access-Control-Allow-Headers" value="Origin, X-Requested-With, Content-Type, Accept, Authorization" />
+        "<add name="Access-Control-Allow-Credentials" value="true" />
+      "</customHeaders>
+    "</httpProtocol>
+    "</system.webServer>
      to web.config
 
        and then in global.asax.cs
