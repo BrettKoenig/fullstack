@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 
-//import { AuthService } from '../shared/shared';
-
 import { AuthService } from './auth.service';
 
 import 'rxjs';
