@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
+
+//import { AuthService } from '../shared/shared';
+
+import { AuthService } from './auth.service';
 
 import 'rxjs';
 import { Observable } from 'rxjs/Observable';
@@ -12,43 +16,49 @@ export class Api {
     currentTournament: any = {};
     private tournamentData = {};
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private AuthService: AuthService) {
 
     }
 
-    getTournaments() : Observable<any>{
-        return this.http.get(`${this.baseUrl}/api/Tournaments`).map((response:Response) => {
+    getTournaments(): Observable<any> {
+        let headers = new Headers({ 'Authorization': 'Bearer ' + this.AuthService.currentUser.token });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(`${this.baseUrl}/api/Tournaments`, options).map((response: Response) => {
             return response.json();
         })
+        //  return this.http.get(`${this.baseUrl}/api/Tournaments`).map((response: Response) => {
+        //     return response.json();
+        // })
     }
 
-    getTournamentData(tournamentId, forceRefresh: boolean = false) : Observable<any>{
-        if(!forceRefresh && this.tournamentData[tournamentId]){
+    getTournamentData(tournamentId, forceRefresh: boolean = false): Observable<any> {
+        if (!forceRefresh && this.tournamentData[tournamentId]) {
             this.currentTournament = this.tournamentData[tournamentId];
             return Observable.of(this.currentTournament);
         }
-        return this.http.get(`${this.baseUrl}/api/Tournaments/${tournamentId}`).map((response:Response) => {
+        return this.http.get(`${this.baseUrl}/api/Tournaments/${tournamentId}`).map((response: Response) => {
             this.tournamentData[tournamentId] = response.json();
             this.currentTournament = this.tournamentData[tournamentId];
             return this.currentTournament;
         })
     }
 
-    getTeamById(teamId) : Observable<any>{
-        return this.http.get(`${this.baseUrl}/api/Teams/${teamId}`).map((response:Response) => {
+    getTeamById(teamId): Observable<any> {
+        return this.http.get(`${this.baseUrl}/api/Teams/${teamId}`).map((response: Response) => {
             return response.json();
         })
     }
 
-    setCurrentTournament(tournament){
+    setCurrentTournament(tournament) {
         this.currentTournament = tournament
     }
 
-    getCurrentTournament(){
+    getCurrentTournament() {
         return this.currentTournament;
     }
 
-    refreshCurrentTournament(){
+    refreshCurrentTournament() {
         return this.getTournamentData(this.currentTournament.tournamentId, true)
     }
 }

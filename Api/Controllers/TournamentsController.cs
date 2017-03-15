@@ -12,6 +12,7 @@ using System.Web.Http.Description;
 
 namespace Api.Controllers
 {
+    [Authorize]
     public class TournamentsController : ApiController
     {
 
