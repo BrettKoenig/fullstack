@@ -15,18 +15,13 @@ export class RegisterPage {
   register() {
     this.auth.register(this.registerCredentials).subscribe(success => {
       if (success) {
-        
-        console.log("RESPONSE1",success)
         this.createSuccess = true;
         this.showPopup("Success", "Account created.");
       } else {
-        
-        console.log("RESPONSE2",success)
         this.showPopup("Error", "Problem creating account.");
       }
     },
       error => {
-        console.log("RESPONSE3",error)
         this.showPopup("Error", error);
       }
     );

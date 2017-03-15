@@ -52,36 +52,9 @@ export class AuthService {
     if (credentials.email === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
     } else {
-      // let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-      // let options = new RequestOptions({ headers: headers });
-      // return this.http.post(`${this.baseUrl}/api/Account/Register`, credentials).map((response: Response) => {
-      //   return response;
-      // })
       return this.http.post(`${this.baseUrl}/api/Account/Register`, credentials);
     }
   }
-  // vm.registerUser = function () {
-  //     vm.userData.confirmPassword = vm.userData.password;
-
-  //     userAccount.registration.registerUser(vm.userData, 
-  //         function (data) {
-  //             vm.confirmPassword = "";
-  //             vm.message = "... Registration successful";
-  //             vm.login();
-  //         }, 
-  //         function (response) {
-  //             vm.isLoggedIn = false;
-  //             vm.message = response.statusText + "\r\n";
-  //             if (response.data.exceptionMessage) {
-  //                 vm.message += response.data.exceptionMessage;
-  //             }
-  //             if (response.data.modelState) {
-  //                 for (var key in response.data.modelState) {
-  //                     vm.message += response.data.modelState[key] + "\r\n";
-  //                 }
-  //             }
-  //         });
-  // }
 
   // vm.login = function () {
   //     vm.userData.grant_type = "password";
