@@ -19,35 +19,8 @@ sql lite for persisted data on phone
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-For CORS on backend on other projects <system.webServer>
+For CORS on backend on other projects 
+"<system.webServer>
     <httpProtocol>
       <customHeaders>
         <add name="Access-Control-Allow-Origin" value="http://localhost:8100" />
@@ -56,7 +29,7 @@ For CORS on backend on other projects <system.webServer>
         <add name="Access-Control-Allow-Credentials" value="true" />
       </customHeaders>
     </httpProtocol>
-    </system.webServer>
+    </system.webServer>"
      to web.config
 
        and then in global.asax.cs
