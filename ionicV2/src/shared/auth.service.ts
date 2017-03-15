@@ -39,6 +39,9 @@ export class AuthService {
       // return this.http.post(`${this.baseUrl}/api/Account/Register`, credentials).map((response: Response) => {
       //   return response;
       // })
+      credentials.grant_type = "password";
+      credentials.userName = credentials.email;
+      
       return this.http.post(`${this.baseUrl}/Token`, credentials, options).map((response: Response) => {
         console.log("HEY", response)
         return response.json();
