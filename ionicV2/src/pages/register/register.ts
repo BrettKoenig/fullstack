@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, ToastController } from 'ionic-angular';
 import { AuthService } from '../../shared/shared';
 
 @Component({
@@ -10,7 +10,7 @@ export class RegisterPage {
   createSuccess = false;
   registerCredentials = { email: '', password: '', confirmPassword: '' };
 
-  constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController) { }
+  constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController, private toastController: ToastController) { }
 
   register() {
     this.auth.register(this.registerCredentials).subscribe(success => {
@@ -28,20 +28,26 @@ export class RegisterPage {
   }
 
   showPopup(title, text) {
-    let alert = this.alertCtrl.create({
-      title: title,
-      subTitle: text,
-      buttons: [
-        {
-          text: 'OK',
-          handler: data => {
-            if (this.createSuccess) {
-              this.nav.popToRoot();
-            }
-          }
-        }
-      ]
+    // let alert = this.alertCtrl.create({
+    //   title: title,
+    //   subTitle: text,
+    //   buttons: [
+    //     {
+    //       text: 'OK',
+    //       handler: data => {
+    //         if (this.createSuccess) {
+    //           this.nav.popToRoot();
+    //         }
+    //       }
+    //     }
+    //   ]
+    // });
+    // alert.present();
+    let toast = this.toastController.create({
+      message: text,
+      duration: 2000,
+      position: 'bottom'
     });
-    alert.present();
+    toast.present();
   }
 }
