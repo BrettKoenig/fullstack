@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 
 import 'rxjs';
 import { Observable } from 'rxjs/Observable';
@@ -34,16 +34,22 @@ export class AuthService {
       //   observer.complete();
       // });
 
-      let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlenconded' }); // ... Set content type to JSON
-      let options = new RequestOptions({ headers: headers });
+      
+
       // return this.http.post(`${this.baseUrl}/api/Account/Register`, credentials).map((response: Response) => {
       //   return response;
       // })
-      credentials.grant_type = "password";
-      credentials.userName = credentials.email;
-      
-      return this.http.post(`${this.baseUrl}/Token`, credentials, options).map((response: Response) => {
-        console.log("HEY", response)
+
+      // credentials.userName = credentials.email;
+      // credentials.grant_type = "password";
+      let urlSearchParams = new URLSearchParams();
+urlSearchParams.append('userName', credentials.email);
+urlSearchParams.append('password', credentials.password);
+urlSearchParams.append('grant_type', 'password');
+let body = urlSearchParams.toString()
+      let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlenconded' });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.post(`${this.baseUrl}/Token`, body, options).map((response: Response) => {
         return response.json();
       });
     }
