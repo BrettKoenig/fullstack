@@ -6,5 +6,6 @@ export class Constant {
 
     getApiUrl(){
         return 'http://localhost:58352';
+        //return 'https://localhost:44339/';
     }
 }

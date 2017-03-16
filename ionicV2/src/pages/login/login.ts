@@ -53,4 +53,22 @@ export class LoginPage {
     });
     toast.present();
   }
+
+  signinFacebook(){
+    this.auth.facebookLogin().subscribe(allowed => {
+      if (allowed) {
+        setTimeout(() => {
+          console.log("1")
+          // this.loading.dismiss();
+          // this.nav.setRoot(MyTeamsPage)
+        });
+      } else {
+        console.log("2")
+      }
+    },
+      error => {
+        console.log(error)
+        console.log("3")
+      });
+  }
 }
