@@ -9,4 +9,7 @@ Api/obj
 Api/obj/
 */obj
 .vs/FullStack/v14/.suo
+Api/Web.config
+Api/Web.Debug.config
+Api/Web.Release.config
 
