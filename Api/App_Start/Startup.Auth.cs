@@ -10,6 +10,7 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Api.Providers;
 using Api.Models;
+using System.Configuration;
 
 namespace Api
 {
@@ -57,8 +58,8 @@ namespace Api
             //    consumerSecret: "");
 
             app.UseFacebookAuthentication(
-                appId: "",
-                appSecret: "");
+                appId: ConfigurationManager.AppSettings["FacebookId"],
+                appSecret: ConfigurationManager.AppSettings["FacebookSecret"]);
             
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
