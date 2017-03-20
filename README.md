@@ -18,6 +18,10 @@ local storage is for temp data, the phone may clean it up at any team
 sql lite for persisted data on phone
 
 
+For external login with ionic2 and .NET Web API:
+-http://www.anysom.dk/blog/posts/2017/january/net-facebook-oauth-from-ionic-2-app/
+-https://www.youtube.com/watch?v=miZpiUD1To0
+
 
 For CORS on backend
 ```xml
