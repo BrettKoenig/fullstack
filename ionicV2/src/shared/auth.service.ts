@@ -99,6 +99,7 @@ export class AuthService {
   // }
 
   private getExternalLoginUrl = function() {
+    //maybe 'http%3A%2F%2Flocalhost%3A8100%2Fcallback';
     var returnUrl = 'http%3A%2F%2Flocalhost%3A8100%2F';
     return this.http.get(`${this.baseUrl}/api/Account/ExternalLogins?returnUrl=${returnUrl}&generateState=true`)
     .map(response => {
@@ -113,7 +114,7 @@ export class AuthService {
     console.log("Passing URL:", url);
     let loginScreenSubject = new ReplaySubject(1);
     let browser = new InAppBrowser(this.baseUrl + url, '_blank', 'location=no,toolbar=no,hardwareback=no,EnableViewPortScale=yes');
-
+    console.log("BROWSER:", browser)
     browser.on("loadstop").subscribe((e) => {
       var accessToken = e.url.match(/\#(?:access_token)\=([\S\s]*?)\&/)[1];
       console.log("ACCESS:", accessToken)
