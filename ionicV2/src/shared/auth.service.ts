@@ -99,7 +99,7 @@ export class AuthService {
   // }
 
   private getExternalLoginUrl = function() {
-    var returnUrl = 'http:%2F%2Flocalhost%2Fcalback';
+    var returnUrl = 'http%3A%2F%2Flocalhost%3A8100%2F';
     return this.http.get(`${this.baseUrl}/api/Account/ExternalLogins?returnUrl=${returnUrl}&generateState=true`)
     .map(response => {
       //this will need to change if more than facebook is enabled
