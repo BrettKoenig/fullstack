@@ -17,6 +17,7 @@ export class RegisterPage {
       if (success) {
         this.createSuccess = true;
         this.showPopup("Success", "Account created.");
+        this.nav.popToRoot();
       } else {
         this.showPopup("Error", "Problem creating account.");
       }
