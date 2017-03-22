@@ -2,5 +2,9 @@
   "name": "ionicV2",
   "app_id": "",
   "v2": true,
-  "typescript": true
+  "typescript": true,
+  "proxies": [{
+    "path": "/api",
+    "proxyUrl": "http://localhost:58352"
+  }]
 }

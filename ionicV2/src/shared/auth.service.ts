@@ -54,7 +54,7 @@ export class AuthService {
     if (credentials.email === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
     } else {
-      return this.http.post(`${this.baseUrl}/api/Account/Register`, credentials).catch((error: any) => {
+      return this.http.post(`${this.baseUrl}/Account/Register`, credentials).catch((error: any) => {
         for (var key in error.json().modelState) {
           for (var i = 0; i < error.json().modelState[key].length; i++) {
             if (key != "$id") {
