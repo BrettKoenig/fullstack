@@ -349,7 +349,7 @@ namespace Api.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
+            } 
 
             var info = await Authentication.GetExternalLoginInfoAsync();
             if (info == null)
