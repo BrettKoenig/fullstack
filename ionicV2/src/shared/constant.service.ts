@@ -5,7 +5,7 @@ export class Constant {
     constructor() { }
 
     getApiUrl(){
-        return '/api';
+        return 'http://localhost:58352';
         //return 'http://localhost:58352';
         //return 'https://localhost:44339';
     }
