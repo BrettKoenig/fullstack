@@ -33,7 +33,8 @@ namespace Api.Providers
 
             ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
 
-            //context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "http://localhost:58397", "http://localhost:8100" });
+            //potentially comment out below if getting an error
+            //context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
             if (user == null)
             {
@@ -45,6 +46,8 @@ namespace Api.Providers
                OAuthDefaults.AuthenticationType);
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
                 CookieAuthenticationDefaults.AuthenticationType);
+            //add claims here like
+            //cookiesIdentity.AddClaim(new Claim("role", "user"));
 
             AuthenticationProperties properties = CreateProperties(user.UserName);
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);

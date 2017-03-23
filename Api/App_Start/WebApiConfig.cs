@@ -12,11 +12,11 @@ namespace Api
 {
     public static class WebApiConfig
     {
-        private static string GetAllowedOrigins()
-        {
-            //Make a call to the database to get allowed origins and convert to a comma separated string
-            return "http://localhost:58397,http://localhost:8100";
-        }
+        //private static string GetAllowedOrigins()
+        //{
+        //    //Make a call to the database to get allowed origins and convert to a comma separated string
+        //    return "http://localhost:58397,http://localhost:8100";
+        //}
 
         public static void Register(HttpConfiguration config)
         {

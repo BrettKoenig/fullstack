@@ -45,6 +45,8 @@ namespace Api
 
             // Enable the application to use bearer tokens to authenticate users
             app.UseOAuthBearerTokens(OAuthOptions);
+            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+            //app.UseWebApi(new System.Web.Http.HttpConfiguration());
 
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(

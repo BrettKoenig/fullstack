@@ -373,6 +373,20 @@ namespace Api.Controllers
             return Ok();
         }
 
+        ///////////////////////////////////////////////////////////
+        //Added from following http://bitoftech.net/2014/06/01/token-based-authentication-asp-net-web-api-2-owin-asp-net-identity/
+
+
+        public async Task<IdentityUser> FindUser(string userName, string password)
+        {
+            IdentityUser user = await _userManager.FindAsync(userName, password);
+
+            return user;
+        }
+
+
+        ///////////////////////////////////////////////////////////
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
