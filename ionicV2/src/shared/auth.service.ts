@@ -47,6 +47,26 @@ export class AuthService {
     }
   }
 
+  public externalLogin(provider){
+    // var redirectUri = location.protocol + '//' + location.host + '/authcomplete.html';
+
+    //     var externalProviderUrl = ngAuthSettings.apiServiceBaseUri + "api/Account/ExternalLogin?provider=" + provider
+    //                                                                 + "&response_type=token&client_id=" + ngAuthSettings.clientId
+    //                                                                 + "&redirect_uri=" + redirectUri;
+    //     window.$windowScope = $scope;
+
+    //     var oauthWindow = window.open(externalProviderUrl, "Authenticate Account", "location=0,status=0,width=600,height=750");
+    window.open(`${this.baseUrl}/api/Account/ExternalLogin?provider=${provider}&response_type=token&redirect_uri=http://localhost:8100/autocomplete.html`);
+    // this.http.post(`${this.baseUrl}/api/Account/ExternalLogin?provider=${provider}&response_type=token&redirect_uri=http://localhost:8100/autocomplete.html`, null, null).map((response: Response) => {
+    //     let jsonResponse = response.json();
+    //     console.log(jsonResponse);
+    //     //this.currentUser = new User(jsonResponse.userName, jsonResponse.userName, jsonResponse.access_token);
+    //     return jsonResponse;
+    //   }).catch((error: any) => {
+    //     return Observable.throw(error.json().error_description || 'Server error')
+    //   });
+  }
+
   public register(credentials): Observable<any> {
     if (credentials.email === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");

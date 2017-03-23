@@ -10,12 +10,15 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Api.Providers;
 using Api.Models;
+using Microsoft.Owin.Security.Facebook;
 
 namespace Api
 {
     public partial class Startup
     {
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
+        public static GoogleOAuth2AuthenticationOptions googleAuthOptions { get; private set; }
+        public static FacebookAuthenticationOptions facebookAuthOptions { get; private set; }
 
         public static string PublicClientId { get; private set; }
 
@@ -58,15 +61,19 @@ namespace Api
             //    consumerKey: "",
             //    consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //    appId: "",
-            //    appSecret: "");
+            app.UseFacebookAuthentication(new FacebookAuthenticationOptions()
+            {
+                AppId = "xxx",
+                AppSecret = "xxx",
+                Provider = new FacebookAuthProvider()
+            });
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "xxx",
+                ClientSecret = "xxx",
+                Provider = new GoogleAuthProvider()
+            });
         }
     }
 }
