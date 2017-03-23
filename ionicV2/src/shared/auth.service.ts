@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { InAppBrowser } from 'ionic-native';
+import { Platform } from 'ionic-angular';
 
 import { Constant } from './constant.service';
 
@@ -23,7 +24,7 @@ export class User {
 @Injectable()
 export class AuthService {
 
-  constructor(private http: Http, private Constant: Constant) { }
+  constructor(private http: Http, private Constant: Constant, private Platform: Platform) { }
 
   private baseUrl = this.Constant.getApiUrl();
   currentUser: User;
@@ -98,53 +99,57 @@ export class AuthService {
   //       })
   // }
 
-  private getExternalLoginUrl = function() {
+  private getExternalLoginUrl = function () {
     //maybe 'http%3A%2F%2Flocalhost%3A8100%2Fcallback';
     var returnUrl = 'http%3A%2F%2Flocalhost%3A8100%2F';
     return this.http.get(`${this.baseUrl}/api/Account/ExternalLogins?returnUrl=${returnUrl}&generateState=true`)
-    .map(response => {
-      //this will need to change if more than facebook is enabled
-      console.log("First:", response.json()[0].url)
-      let data = response.json()[0];
-      return data.url;
-    })
+      .map(response => {
+        //this will need to change if more than facebook is enabled
+        console.log("First:", response.json()[0].url)
+        let data = response.json()[0];
+        return data.url;
+      })
   }
 
-  private getExternalLoginScreen = function(url){
+  private getExternalLoginScreen = function (url) {
     console.log("Passing URL:", url);
     let loginScreenSubject = new ReplaySubject(1);
-    let browser = new InAppBrowser(this.baseUrl + url, '_blank', 'location=no,toolbar=no,hardwareback=no,EnableViewPortScale=yes');
-    console.log("BROWSER:", browser)
-    browser.on("loadstop").subscribe((e) => {
-      var accessToken = e.url.match(/\#(?:access_token)\=([\S\s]*?)\&/)[1];
-      console.log("ACCESS:", accessToken)
-      browser.close();
+    if (this.plt.is('cordova')) {
+      let browser = new InAppBrowser(this.baseUrl + url, '_blank', 'location=no,toolbar=no,hardwareback=no,EnableViewPortScale=yes');
+      console.log("BROWSER:", browser)
+      browser.on("loadstop").subscribe((e) => {
+        var accessToken = e.url.match(/\#(?:access_token)\=([\S\s]*?)\&/)[1];
+        console.log("ACCESS:", accessToken)
+        browser.close();
+        loginScreenSubject.next(accessToken);
+        loginScreenSubject.complete();
+      },
+        err => {
+          console.log("InAppBrowser Loadstop Event Error: " + err);
+        });
+    } else {
+      window.open(this.baseUrl + url, '_blank', 'location=no,toolbar=no,hardwareback=no,EnableViewPortScale=yes');
+    }
 
-      loginScreenSubject.next(accessToken);
-      loginScreenSubject.complete();
-    },
-    err => {
-      console.log("InAppBrowser Loadstop Event Error: " + err);
-    });
 
     return loginScreenSubject;
   }
 
-  public facebookLogin(){
+  public facebookLogin() {
     console.log('calling facebook login');
 
     var accessTokenObservable = this.getExternalLoginUrl()
       .flatMap(url => this.getExternalLoginScreen(url));
 
-      accessTokenObservable.subscribe(
-        accessToken => {
-          this.accessTokenSubject.next(accessToken);
-          this.accessTokenSubject.complete();
-        }, 
-        err => {
-          console.log("InAppBrowser Loadstop Event Error:" + err);
-        });
+    accessTokenObservable.subscribe(
+      accessToken => {
+        this.accessTokenSubject.next(accessToken);
+        this.accessTokenSubject.complete();
+      },
+      err => {
+        console.log("InAppBrowser Loadstop Event Error:" + err);
+      });
 
-        return this.accessTokenSubject;
+    return this.accessTokenSubject;
   }
 }
