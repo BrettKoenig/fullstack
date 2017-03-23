@@ -281,6 +281,10 @@
     <Compile Include="Migrations\201703151843412_RemovingUnneccessaryDocs.Designer.cs">
       <DependentUpon>201703151843412_RemovingUnneccessaryDocs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703231857258_FixingDbBack.cs" />
+    <Compile Include="Migrations\201703231857258_FixingDbBack.Designer.cs">
+      <DependentUpon>201703231857258_FixingDbBack.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -332,6 +336,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703151843412_RemovingUnneccessaryDocs.resx">
       <DependentUpon>201703151843412_RemovingUnneccessaryDocs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703231857258_FixingDbBack.resx">
+      <DependentUpon>201703231857258_FixingDbBack.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
