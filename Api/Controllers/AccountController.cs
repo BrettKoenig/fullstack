@@ -258,13 +258,26 @@ namespace Api.Controllers
             if (hasRegistered)
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                
-                 ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
-                    OAuthDefaults.AuthenticationType);
+
+                ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                              OAuthDefaults.AuthenticationType);
                 ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
-                    CookieAuthenticationDefaults.AuthenticationType);
+                               CookieAuthenticationDefaults.AuthenticationType);
 
                 AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
+
+                // ADD THIS PART
+                var ticket = new AuthenticationTicket(oAuthIdentity, properties);
+                var accessToken = Startup.OAuthOptions.AccessTokenFormat.Protect(ticket);
+
+                Microsoft.Owin.Security.Infrastructure.AuthenticationTokenCreateContext context =
+                    new Microsoft.Owin.Security.Infrastructure.AuthenticationTokenCreateContext(
+                        Request.GetOwinContext(),
+                        Startup.OAuthOptions.AccessTokenFormat, ticket);
+
+                await Startup.OAuthOptions.RefreshTokenProvider.CreateAsync(context);
+                properties.Dictionary.Add("refresh_token", context.Token);
+
                 Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
             }
             else
@@ -377,9 +390,9 @@ namespace Api.Controllers
         //Added from following http://bitoftech.net/2014/06/01/token-based-authentication-asp-net-web-api-2-owin-asp-net-identity/
 
 
-        public async Task<IdentityUser> FindUser(string userName, string password)
+        public async Task<ApplicationUser> FindUser(string userName, string password)
         {
-            IdentityUser user = await _userManager.FindAsync(userName, password);
+            ApplicationUser user = await _userManager.FindAsync(userName, password);
 
             return user;
         }

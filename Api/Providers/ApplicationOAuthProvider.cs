@@ -10,6 +10,11 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Api.Models;
+using Api.Repositories;
+using Microsoft.Owin.Security.Infrastructure;
+using System.Collections.Concurrent;
+using System.Web;
+using Api.Services;
 
 namespace Api.Providers
 {
@@ -29,30 +34,63 @@ namespace Api.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+            //    var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            //    ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
 
-            //potentially comment out below if getting an error
-            //context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+            //    if (user == null)
+            //    {
+            //        context.SetError("invalid_grant", "The user name or password is incorrect.");
+            //        return;
+            //    }
 
-            if (user == null)
+            //    ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
+            //       OAuthDefaults.AuthenticationType);
+            //    ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
+            //        CookieAuthenticationDefaults.AuthenticationType);
+            //    //add claims here like
+            //    //cookiesIdentity.AddClaim(new Claim("role", "user"));
+
+            //    AuthenticationProperties properties = CreateProperties(user.UserName);
+            //    AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
+            //    context.Validated(ticket);
+            //    context.Request.Context.Authentication.SignIn(cookiesIdentity);
+
+
+            //may need to comment out three lines below
+            //var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin");
+            //if (allowedOrigin == null) allowedOrigin = "*";
+            //context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
+
+            using (AuthRepository _repo = new AuthRepository())
             {
-                context.SetError("invalid_grant", "The user name or password is incorrect.");
-                return;
+                var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+                ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+
+                if (user == null)
+                {
+                    context.SetError("invalid_grant", "The user name or password is incorrect.");
+                    return;
+                }
             }
 
-            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
-               OAuthDefaults.AuthenticationType);
-            ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
-                CookieAuthenticationDefaults.AuthenticationType);
-            //add claims here like
-            //cookiesIdentity.AddClaim(new Claim("role", "user"));
+            var identity = new ClaimsIdentity(context.Options.AuthenticationType);
+            identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
+            identity.AddClaim(new Claim("sub", context.UserName));
+            identity.AddClaim(new Claim("role", "user"));
 
-            AuthenticationProperties properties = CreateProperties(user.UserName);
-            AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
+            var props = new AuthenticationProperties(new Dictionary<string, string>
+                {
+                    {
+                        "as:client_id", (context.ClientId == null) ? string.Empty : context.ClientId
+                    },
+                    {
+                        "userName", context.UserName
+                    }
+                });
+
+            var ticket = new AuthenticationTicket(identity, props);
             context.Validated(ticket);
-            context.Request.Context.Authentication.SignIn(cookiesIdentity);
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
@@ -67,12 +105,62 @@ namespace Api.Providers
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
-            // Resource owner password credentials does not provide a client ID.
-            if (context.ClientId == null)
+            string clientId = string.Empty;
+            string clientSecret = string.Empty;
+            Client client = null;
+
+            if (!context.TryGetBasicCredentials(out clientId, out clientSecret))
             {
-                context.Validated();
+                context.TryGetFormCredentials(out clientId, out clientSecret);
             }
 
+            if (context.ClientId == null)
+            {
+                //Remove the comments from the below line context.SetError, and invalidate context 
+                //if you want to force sending clientId/secrects once obtain access tokens. 
+                context.Validated();
+                //context.SetError("invalid_clientId", "ClientId should be sent.");
+                return Task.FromResult<object>(null);
+            }
+
+            using (AuthRepository _repo = new AuthRepository())
+            {
+                client = _repo.FindClient(context.ClientId);
+            }
+
+            if (client == null)
+            {
+                context.SetError("invalid_clientId", string.Format("Client '{0}' is not registered in the system.", context.ClientId));
+                return Task.FromResult<object>(null);
+            }
+
+            if (client.ApplicationType == Models.ApplicationTypes.NativeConfidential)
+            {
+                if (string.IsNullOrWhiteSpace(clientSecret))
+                {
+                    context.SetError("invalid_clientId", "Client secret should be sent.");
+                    return Task.FromResult<object>(null);
+                }
+                else
+                {
+                    if (client.Secret != Helper.GetHash(clientSecret))
+                    {
+                        context.SetError("invalid_clientId", "Client secret is invalid.");
+                        return Task.FromResult<object>(null);
+                    }
+                }
+            }
+
+            if (!client.Active)
+            {
+                context.SetError("invalid_clientId", "Client is inactive.");
+                return Task.FromResult<object>(null);
+            }
+
+            context.OwinContext.Set<string>("as:clientAllowedOrigin", client.AllowedOrigin);
+            context.OwinContext.Set<string>("as:clientRefreshTokenLifeTime", client.RefreshTokenLifeTime.ToString());
+
+            context.Validated();
             return Task.FromResult<object>(null);
         }
 
@@ -91,6 +179,16 @@ namespace Api.Providers
             return Task.FromResult<object>(null);
         }
 
+        public override Task AuthorizationEndpointResponse(OAuthAuthorizationEndpointResponseContext context)
+        {
+            var refreshToken = context.OwinContext.Authentication.AuthenticationResponseGrant.Properties.Dictionary["refresh_token"];
+            if (!string.IsNullOrEmpty(refreshToken))
+            {
+                context.AdditionalResponseParameters.Add("refresh_token", refreshToken);
+            }
+            return base.AuthorizationEndpointResponse(context);
+        }
+
         public static AuthenticationProperties CreateProperties(string userName)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
@@ -98,6 +196,27 @@ namespace Api.Providers
                 { "userName", userName }
             };
             return new AuthenticationProperties(data);
+        }
+
+        public override Task GrantRefreshToken(OAuthGrantRefreshTokenContext context)
+        {
+            var originalClient = context.Ticket.Properties.Dictionary["as:client_id"];
+            var currentClient = context.ClientId;
+
+            if (originalClient != currentClient)
+            {
+                context.SetError("invalid_clientId", "Refresh token is issued to a different clientId.");
+                return Task.FromResult<object>(null);
+            }
+
+            // Change auth ticket for refresh token requests
+            var newIdentity = new ClaimsIdentity(context.Ticket.Identity);
+            newIdentity.AddClaim(new Claim("newClaim", "newValue"));
+
+            var newTicket = new AuthenticationTicket(newIdentity, context.Ticket.Properties);
+            context.Validated(newTicket);
+
+            return Task.FromResult<object>(null);
         }
     }
 }

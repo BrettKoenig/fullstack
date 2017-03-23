@@ -240,6 +240,7 @@
     <Compile Include="App_Start\StructuremapWebApi.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\RefreshTokensController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Controllers\TournamentsController.cs" />
     <Compile Include="DependencyResolution\DefaultRegistry.cs" />
@@ -281,21 +282,31 @@
     <Compile Include="Migrations\201703151843412_RemovingUnneccessaryDocs.Designer.cs">
       <DependentUpon>201703151843412_RemovingUnneccessaryDocs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703231401372_AddingRefreshTokens.cs" />
+    <Compile Include="Migrations\201703231401372_AddingRefreshTokens.Designer.cs">
+      <DependentUpon>201703231401372_AddingRefreshTokens.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ApplicationTypes.cs" />
+    <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Division.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\RefreshToken.cs" />
     <Compile Include="Models\Standing.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\Tournament.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Providers\SimpleRefreshTokenProvider.cs" />
+    <Compile Include="Repositories\AuthRepository.cs" />
     <Compile Include="Repositories\TeamRepository.cs" />
     <Compile Include="Repositories\TournamentRepository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Services\Helper.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -341,6 +352,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703151843412_RemovingUnneccessaryDocs.resx">
       <DependentUpon>201703151843412_RemovingUnneccessaryDocs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703231401372_AddingRefreshTokens.resx">
+      <DependentUpon>201703231401372_AddingRefreshTokens.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

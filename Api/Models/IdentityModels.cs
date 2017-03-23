@@ -42,5 +42,9 @@ namespace Api.Models
 
         public System.Data.Entity.DbSet<Tournament> Tournaments { get; set; }
 
+        public System.Data.Entity.DbSet<Client> Clients { get; set; }
+
+        public System.Data.Entity.DbSet<RefreshToken> RefreshTokens { get; set; }
+
     }
 }
