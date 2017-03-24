@@ -114,7 +114,7 @@ export class AuthService {
   private getExternalLoginScreen = function (url) {
     console.log("Passing URL:", url);
     let loginScreenSubject = new ReplaySubject(1);
-    if (this.plt.is('cordova')) {
+    if (this.Platform.is('cordova')) {
       let browser = new InAppBrowser(this.baseUrl + url, '_blank', 'location=no,toolbar=no,hardwareback=no,EnableViewPortScale=yes');
       console.log("BROWSER:", browser)
       browser.on("loadstop").subscribe((e) => {
@@ -128,7 +128,8 @@ export class AuthService {
           console.log("InAppBrowser Loadstop Event Error: " + err);
         });
     } else {
-      window.open(this.baseUrl + url, '_blank', 'location=no,toolbar=no,hardwareback=no,EnableViewPortScale=yes');
+      console.log("HEY HEY HEY", this.baseUrl + url)
+      window.open(this.baseUrl + url, '_blank');
     }
 
 
@@ -147,6 +148,7 @@ export class AuthService {
         this.accessTokenSubject.complete();
       },
       err => {
+        console.log("HEY HEY KJASLDKJF")
         console.log("InAppBrowser Loadstop Event Error:" + err);
       });
 
