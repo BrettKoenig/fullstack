@@ -56,7 +56,18 @@ export class LoginPage {
    */
 
   authExternalProvider(provider){
-    this.auth.externalLogin(provider);
+    this.auth.externalLogin(provider)
+    // .subscribe(allowed => {
+    //   if (allowed) {
+    //     console.log("ALLOWED ")
+    //     console.log(allowed)
+    //   } else {
+    //     this.showError("Access Denied");
+    //   }
+    // },
+    //   error => {
+    //     this.showError(error);
+    //   });
   }
 
   showError(text) {
