@@ -286,6 +286,10 @@
     <Compile Include="Migrations\201703231401372_AddingRefreshTokens.Designer.cs">
       <DependentUpon>201703231401372_AddingRefreshTokens.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703241351052_UpdatingTable.cs" />
+    <Compile Include="Migrations\201703241351052_UpdatingTable.Designer.cs">
+      <DependentUpon>201703241351052_UpdatingTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -357,6 +361,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703231401372_AddingRefreshTokens.resx">
       <DependentUpon>201703231401372_AddingRefreshTokens.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703241351052_UpdatingTable.resx">
+      <DependentUpon>201703241351052_UpdatingTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

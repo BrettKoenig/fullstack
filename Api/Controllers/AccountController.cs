@@ -276,6 +276,18 @@ namespace Api.Controllers
                                             externalLogin.UserName);
 
             return Redirect(redirectUri);
+            //if doesn't have a local account it:
+            //calls logout
+            //sets externalAuthData provider, username, external access token
+            //goes to associate (instead of associate maybe get email from facebook.gmail in line 254)
+            //then calls registerExternal
+            //then through to the app
+
+
+            //if does have a local account
+            //obtains access token passing provider and external access token to authService.obtainAccessToken
+            //calls obtainLocalAccessToken and passes back this token
+            //then through to the app
         }
 
         // GET api/Account/ExternalLogins?returnUrl=%2F&generateState=true
@@ -701,7 +713,7 @@ namespace Api.Controllers
 
             var ticket = new AuthenticationTicket(identity, props);
 
-            var accessToken = Startup.OAuthOptions.AccessTokenFormat.Protect(ticket);
+            var accessToken = Startup.OAuthBearerOptions.AccessTokenFormat.Protect(ticket);
 
             JObject tokenResponse = new JObject(
                                         new JProperty("userName", userName),

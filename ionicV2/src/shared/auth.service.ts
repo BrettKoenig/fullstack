@@ -48,27 +48,7 @@ export class AuthService {
   }
 
   public externalLogin(provider){
-    console.log("WE IN HERE")
-    // var redirectUri = location.protocol + '//' + location.host + '/authcomplete.html';
-
-    //     var externalProviderUrl = ngAuthSettings.apiServiceBaseUri + "api/Account/ExternalLogin?provider=" + provider
-    //                                                                 + "&response_type=token&client_id=" + ngAuthSettings.clientId
-    //                                                                 + "&redirect_uri=" + redirectUri;
-    //     window.$windowScope = $scope;
-
-    //     var oauthWindow = window.open(externalProviderUrl, "Authenticate Account", "location=0,status=0,width=600,height=750");
-    // this.http.get(`${this.baseUrl}/api/Account/ExternalLogin?provider=${provider}&response_type=token&redirect_uri=http://localhost:8100/autocomplete.html`);
-    console.log("in");
-    //window.open('http://localhost:26264/api/Account/ExternalLogin?provider=Facebook&response_type=token&client_id=ngAuthApp&redirect_uri=http://localhost:8100/authcomplete.html')
-    window.open('http://localhost:58352/api/Account/ExternalLogin?provider=Facebook&response_type=token&client_id=ngAuthApp&redirect_uri=http://localhost:8100/authcomplete.html')
-    // window.open('http://localhost:26264/api/Account/ExternalLogin?provider=Facebook&response_type=token&client_id=ngAuthApp&redirect_uri=http://localhost:8100/authcomplete.html').map((response: Response) => {
-    //   console.log("boom");
-    //   console.log(response)
-    //         return response.json();
-    //     })
-    // console.log(`${this.baseUrl}/api/Account/ExternalLogin?provider=Facebook&response_type=token&client_id=ngAuthApp&redirect_uri=http://localhost:8100/authcomplete.html`);
-    // window.open(`${this.baseUrl}/api/Account/ExternalLogin?provider=Facebook&response_type=token&client_id=ngAuthApp&redirect_uri=http://localhost:8100/authcomplete.html`);
-    // this.http.get('http://localhost:58352/api/Account/ExternalLogin?provider=Facebook&response_type=token&client_id=ngAuthApp&redirect_uri=http://localhost:8100/authcomplete.html');
+    window.open('http://localhost:58352/api/Account/ExternalLogin?provider=Google&response_type=token&client_id=ngAuthApp&redirect_uri=http://localhost:8100/authcomplete.html')
   }
 
   public register(credentials): Observable<any> {

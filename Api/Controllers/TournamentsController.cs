@@ -23,6 +23,7 @@ namespace Api.Controllers
             _tournamentRepository = tournamentRepository;
         }
 
+        [AllowAnonymous]
         [ResponseType(typeof(Tournament))]
         // GET: api/Products
         public IHttpActionResult Get()

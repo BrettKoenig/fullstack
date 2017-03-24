@@ -1,6 +1,7 @@
 namespace Api.Migrations
 {
     using Models;
+    using Services;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -130,6 +131,18 @@ namespace Api.Migrations
                 new Division { DivisionId = 2, Name = "7th Grade" },
                 new Division { DivisionId = 3, Name = "8th Grade" }
                 );
+
+            context.Clients.AddOrUpdate(
+                new Client
+                {
+                    Id = "ngAuthApp",
+                    Secret = Helper.GetHash("abc@123"),
+                    Name = "Ionic front-end Application",
+                    ApplicationType = Models.ApplicationTypes.JavaScript,
+                    Active = true,
+                    RefreshTokenLifeTime = 7200,
+                    AllowedOrigin = "http://localhost:8100"
+                });
         }
     }
 }
