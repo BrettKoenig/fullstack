@@ -52,20 +52,21 @@ namespace Api
             //app.UseTwitterAuthentication(
             //    consumerKey: "",
             //    consumerSecret: "");
-
-            app.UseFacebookAuthentication(new FacebookAuthenticationOptions()
+            facebookAuthOptions = new FacebookAuthenticationOptions()
             {
                 AppId = "",
                 AppSecret = "",
                 Provider = new FacebookAuthProvider()
-            });
+            };
+            app.UseFacebookAuthentication(facebookAuthOptions);
 
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            googleAuthOptions = new GoogleOAuth2AuthenticationOptions()
             {
                 ClientId = "",
                 ClientSecret = "",
                 Provider = new GoogleAuthProvider()
-            });
+            };
+            app.UseGoogleAuthentication(googleAuthOptions);
         }
     }
 }

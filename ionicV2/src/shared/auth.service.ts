@@ -47,8 +47,15 @@ export class AuthService {
     }
   }
 
-  public externalLogin(provider){
-    window.open('http://localhost:58352/api/Account/ExternalLogin?provider=Google&response_type=token&client_id=ngAuthApp&redirect_uri=http://localhost:8100/authcomplete.html')
+  public externalLogin(provider) {
+    // return this.http.get('http://localhost:58352/api/Account/ExternalLogin?provider=Google&response_type=token&client_id=ngAuthApp&redirect_uri=http://localhost:8100/authcomplete.html')
+    //   .map((response: Response) => {
+    //     console.log("GET RE", response)
+    //     return response.json();
+    //   })
+
+    window.open('http://localhost:58352/api/Account/ExternalLogin?provider=Google&response_type=token&client_id=ngAuthApp&redirect_uri=http://localhost:8100/authorized.html');
+
   }
 
   public register(credentials): Observable<any> {

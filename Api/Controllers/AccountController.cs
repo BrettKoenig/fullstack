@@ -19,6 +19,7 @@ using Api.Results;
 using System.Linq;
 using Api.Repositories;
 using Newtonsoft.Json.Linq;
+using System.Web.Http.Results;
 
 namespace Api.Controllers
 {
@@ -264,30 +265,58 @@ namespace Api.Controllers
                 return new ChallengeResult(provider, this);
             }
 
-            IdentityUser user = await _repo.FindAsync(new UserLoginInfo(externalLogin.LoginProvider, externalLogin.ProviderKey));
+            ApplicationUser user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider, externalLogin.ProviderKey));
 
             bool hasRegistered = user != null;
 
-            redirectUri = string.Format("{0}#external_access_token={1}&provider={2}&haslocalaccount={3}&external_user_name={4}",
+            redirectUri = string.Format("{0}?external_access_token={1}&provider={2}&haslocalaccount={3}&external_user_name={4}",
                                             redirectUri,
                                             externalLogin.ExternalAccessToken,
                                             externalLogin.LoginProvider,
                                             hasRegistered.ToString(),
                                             externalLogin.UserName);
 
-            return Redirect(redirectUri);
+            //return Redirect(redirectUri);
             //if doesn't have a local account it:
-            //calls logout
-            //sets externalAuthData provider, username, external access token
-            //goes to associate (instead of associate maybe get email from facebook.gmail in line 254)
-            //then calls registerExternal
-            //then through to the app
-
-
-            //if does have a local account
-            //obtains access token passing provider and external access token to authService.obtainAccessToken
-            //calls obtainLocalAccessToken and passes back this token
-            //then through to the app
+            //for handling redirecting -- IHttpActionResult result = null;
+            if (!hasRegistered)
+            {
+                //calls logout
+                //check if this returns ok?
+                Logout();
+                //sets externalAuthData provider, username, external access token
+                //goes to associate (instead of associate maybe get email from facebook.gmail in line 254)
+                //then calls registerExternal
+                //externalLogin.userName returns persons name as registered on services
+                //was var result instead of return below to handle redirecting
+                return await RegisterExternal(new RegisterExternalBindingModel
+                {
+                    Email = externalLogin.Email,
+                    UserName = externalLogin.Email,
+                    ExternalAccessToken = externalLogin.ExternalAccessToken,
+                    Provider = externalLogin.LoginProvider
+                });
+                //then through to the app
+                
+            }
+            else
+            {
+                //if does have a local account
+                //obtains access token passing provider and external access token to authService.obtainAccessToken
+                //calls obtainLocalAccessToken and passes back this token
+                //then through to the app
+                //was var result instead of return below to handle redirecting
+                return await ObtainLocalAccessToken(externalLogin.LoginProvider, externalLogin.ExternalAccessToken);
+            }
+            //below nees some work to pass back local access token and register external object
+            //if(result is OkNegotiatedContentResult<Newtonsoft.Json.Linq.JObject>)
+            //{
+            //    return Redirect(redirectUri);
+            //}
+            //else
+            //{
+            //    return Redirect("http://yahoo.com");
+            //}
         }
 
         // GET api/Account/ExternalLogins?returnUrl=%2F&generateState=true
@@ -379,9 +408,11 @@ namespace Api.Controllers
                 return BadRequest("External user is already registered");
             }
 
-            user = new IdentityUser() { UserName = model.UserName };
+            //change these enxt two lines with how we regester users
+            //user = new IdentityUser() { UserName = model.UserName };
+            var newUser = new ApplicationUser() { UserName = model.UserName, Email = model.Email };
 
-            IdentityResult result = await _repo.CreateAsync(user);
+            IdentityResult result = await UserManager.CreateAsync(newUser);
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -393,7 +424,7 @@ namespace Api.Controllers
                 Login = new UserLoginInfo(model.Provider, verifiedAccessToken.user_id)
             };
 
-            result = await _repo.AddLoginAsync(user.Id, info.Login);
+            result = await UserManager.AddLoginAsync(newUser.Id, info.Login);
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -421,7 +452,6 @@ namespace Api.Controllers
         [Route("ObtainLocalAccessToken")]
         public async Task<IHttpActionResult> ObtainLocalAccessToken(string provider, string externalAccessToken)
         {
-
             if (string.IsNullOrWhiteSpace(provider) || string.IsNullOrWhiteSpace(externalAccessToken))
             {
                 return BadRequest("Provider or external access token is not sent");
@@ -433,7 +463,7 @@ namespace Api.Controllers
                 return BadRequest("Invalid Provider or External Access Token");
             }
 
-            IdentityUser user = await _repo.FindAsync(new UserLoginInfo(provider, verifiedAccessToken.user_id));
+            ApplicationUser user = await UserManager.FindAsync(new UserLoginInfo(provider, verifiedAccessToken.user_id));
 
             bool hasRegistered = user != null;
 
@@ -446,11 +476,8 @@ namespace Api.Controllers
             var accessTokenResponse = GenerateLocalAccessTokenResponse(user.UserName);
 
             return Ok(accessTokenResponse);
-
         }
-
-
-
+        
         private string ValidateClientAndRedirectUri(HttpRequestMessage request, ref string redirectUriOutput)
         {
 
@@ -567,6 +594,7 @@ namespace Api.Controllers
             public string ProviderKey { get; set; }
             public string UserName { get; set; }
             public string ExternalAccessToken { get; set; }
+            public string Email { get; set; }
 
             public IList<Claim> GetClaims()
             {
@@ -600,13 +628,14 @@ namespace Api.Controllers
                 {
                     return null;
                 }
-
+                //UserName = identity.FindFirstValue(ClaimTypes.Name)
                 return new ExternalLoginData
                 {
                     LoginProvider = providerKeyClaim.Issuer,
                     ProviderKey = providerKeyClaim.Value,
                     UserName = identity.FindFirstValue(ClaimTypes.Name),
-                    ExternalAccessToken = identity.FindFirstValue("ExternalAccessToken")
+                    ExternalAccessToken = identity.FindFirstValue("ExternalAccessToken"),
+                    Email = identity.FindFirstValue(ClaimTypes.Email)
                 };
             }
         }
