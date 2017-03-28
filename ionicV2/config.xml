@@ -37,4 +37,8 @@
     <plugin name="cordova-plugin-device" spec="1.1.4" />
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
     <plugin name="cordova-sqlite-storage" spec="~2.0.2" />
+    <plugin name="cordova-plugin-googleplus" spec="~5.1.1">
+        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.564351314560-qmhl7caqr5jp821ih42gc06f4bdv6inf" />
+    </plugin>
+    <plugin name="cordova-plugin-nativestorage" spec="~2.2.1" />
 </widget>

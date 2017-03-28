@@ -46,3 +46,8 @@ and then in global.asax.cs
             res.End();
         }
     }
+
+for sdk auth following:
+	https://ionicthemes.com/tutorials/about/ionic2-google-login
+TO-DO:
+- need to update for production https://developers.google.com/android/guides/client-auth (need path to production keystore)

@@ -57,6 +57,25 @@ namespace Api.Models
         public string Email { get; set; }
     }
 
+    public class RegisterExternalMobileBindingModel
+    {
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        public string Token { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        public string ServerAuth { get; set; }
+
+        [Required]
+        [Display(Name = "Email")]
+        public string Provider { get; set; }
+    }
+
     public class RemoveLoginBindingModel
     {
         [Required]

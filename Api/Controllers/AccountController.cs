@@ -341,6 +341,16 @@ namespace Api.Controllers
         }
 
         // POST api/Account/RegisterExternal
+        [AllowAnonymous]
+        //[OverrideAuthentication]
+        //[HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [Route("RegisterExternalMobile")]
+        public async Task<IHttpActionResult> RegisterExternalMobile(RegisterExternalMobileBindingModel model)
+        {
+            return Ok();
+        }
+
+        // POST api/Account/RegisterExternal
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("RegisterExternal")]
