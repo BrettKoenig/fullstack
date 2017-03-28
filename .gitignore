@@ -9,4 +9,6 @@ Api/obj
 Api/obj/
 */obj
 .vs/FullStack/v14/.suo
+*/google-services.json
+*/GoogleService-Info.plist
 
