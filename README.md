@@ -55,9 +55,15 @@ TO-DO:
 
 
 To connect to localhost from android emulator:
+
 -make sure you can hit 127.0.0.1:<port> from postman
+
     -update ProjectDir/.vs/config/applicationhost.config so bindings look like <binding protocol="http" bindingInformation=":8080:*" />
+
     -from command line netsh http add urlacl url=http://*:<port>/ user=everyone
+
     -in IIS on the app pool for the server > advanced settings > Load User Profile should be false
+    
     -Allow IIS Express through Windows firewall. Start / Windows Firewall with Advanced Security / Inbound Rules / New Rule...Program %ProgramFiles%\IIS Express\iisexpress.exe
--then you can hit localhost as http://10.0.2.2:<port>from app
+    
+-then you can hit localhost as http://10.0.2.2:<port> from app
