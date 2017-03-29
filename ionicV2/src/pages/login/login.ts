@@ -38,54 +38,65 @@ export class LoginPage {
   }
 
   doGoogleLogin() {
-    let internalLoading = this.loading;
-    let internalAuth = this.auth;
-    let internalStorage = this.nativeStorage;
-    let internalNav = this.nav;
-    this.showLoading();
+    //this.showLoading();
     this.googlePlus.login({
       'scopes': '', // optional, space-separated list of scopes, If not included or empty, defaults to `profile` and `email`.
       'webClientId': '564351314560-3367kb7doe144pg19ukog9l8pnta3mda.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
       'offline': true
     })
-      .then(function (user) {
-        internalLoading.dismiss();
-        internalAuth.setExternalUser({ token: user.idToken, email: user.email, serverAuth: user.serverAuthCode, provider: "Google" }).subscribe(response => {
-          internalStorage.setItem('user', {
+      .then((user) => {
+        //internalLoading.dismiss();
+        //alert("user")
+        //alert(user)
+        this.auth.setExternalUser({ token: user.idToken, email: user.email, serverAuth: user.serverAuthCode, provider: "Google" }).subscribe(response => {
+          //alert("GotResponse")
+          //alert(response)
+          this.nativeStorage.setItem('user', {
             token: user.idToken,
             photo: user.imageUrl,
             serverAuthCode: user.serverAuthCode,
             name: user.displayName,
             email: user.email,
             picture: user.imageUrl
-          }).then(function () {
+          }).then(() => {
             setTimeout(() => {
-              internalLoading.dismiss();
-              internalNav.setRoot(MyTeamsPage)
+              //alert("Set Item In storage")
+              //internalLoading.dismiss();
+              //this.loading.dismiss();
+              this.nav.setRoot(MyTeamsPage);
             });
-          }, function (error) {
-            internalLoading.dismiss();
-            alert(error);
-              internalNav.setRoot(MyTeamsPage)
+          }, error => {
+            //internalLoading.dismiss();
+            // alert("Error setting item in storage")
+            // alert(error);
+            setTimeout(() => {
+              //this.loading.dismiss();
+              this.nav.setRoot(MyTeamsPage)
+            });
           })
         },
           error => {
-            alert(error)
-            console.log(error)
+            //alert("error with setexternaluser")
+            //alert(error)
+            //console.log(error)
           });
         //need to subscribe to this to get the returned token
 
-      }, function (error) {
+      }, error => {
+        //alert("Error with google log in")
         setTimeout(() => {
-          alert(error);
+          //alert(error);
           let user = { token: "test", email: "test", serverAuth: "test", provider: "Google" }
-          internalAuth.setExternalUser(user).subscribe(response => {
-            console.log(response)
-            alert(response)
+          this.auth.setExternalUser(user).subscribe(response => {
+            //alert("setUser good")
+            //console.log(response)
+            //alert(response)
           },
             error => {
-              alert(error)
-              console.log(error)
+              //alert("set User bad")
+              //alert(error)
+              //console.log(error)
+              this.nav.setRoot(MyTeamsPage);
             });
           //internalLoading.dismiss();
         });
