@@ -290,6 +290,10 @@
     <Compile Include="Migrations\201703241351052_UpdatingTable.Designer.cs">
       <DependentUpon>201703241351052_UpdatingTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703291954115_branchSwitch.cs" />
+    <Compile Include="Migrations\201703291954115_branchSwitch.Designer.cs">
+      <DependentUpon>201703291954115_branchSwitch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -364,6 +368,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703241351052_UpdatingTable.resx">
       <DependentUpon>201703241351052_UpdatingTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703291954115_branchSwitch.resx">
+      <DependentUpon>201703291954115_branchSwitch.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

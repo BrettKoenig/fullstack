@@ -29,6 +29,8 @@ namespace Api
             app.UseExternalSignInCookie(Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ExternalCookie);
             OAuthBearerOptions = new OAuthBearerAuthenticationOptions();
 
+            PublicClientId = "self";
+
             OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
 
@@ -54,19 +56,20 @@ namespace Api
             //    consumerSecret: "");
             facebookAuthOptions = new FacebookAuthenticationOptions()
             {
-                AppId = "",
-                AppSecret = "",
+                AppId = "1784717448511826",
+                AppSecret = "1e123d378167ae27358e8573af9febbb",
                 Provider = new FacebookAuthProvider()
             };
             app.UseFacebookAuthentication(facebookAuthOptions);
 
             googleAuthOptions = new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "",
-                ClientSecret = "",
+                ClientId = "564351314560-3367kb7doe144pg19ukog9l8pnta3mda.apps.googleusercontent.com",
+                ClientSecret = "uBd571YX8Lan9SixkInSTne2",
                 Provider = new GoogleAuthProvider()
             };
             app.UseGoogleAuthentication(googleAuthOptions);
+
         }
     }
 }

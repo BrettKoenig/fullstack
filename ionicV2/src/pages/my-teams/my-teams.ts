@@ -15,11 +15,14 @@ export class MyTeamsPage {
   username = '';
   email = '';
 
-  constructor(private navCtrl: NavController, private navParams: NavParams, private loadingController: LoadingController, private Api:Api, private UserSettings:UserSettings, private AuthService:AuthService) {
-    let info = this.AuthService.getUserInfo();
-    this.username = info.name;
-    this.email = info.email;
-   }
+  constructor(private navCtrl: NavController, private navParams: NavParams, private loadingController: LoadingController, private Api: Api, private UserSettings: UserSettings, private AuthService: AuthService) {
+    this.AuthService.getUserInfo().subscribe(info => {
+      if (info) {
+        this.username = info.name;
+        this.email = info.email;
+      }
+    });
+  }
 
   ionViewDidLoad() {
   }
@@ -28,7 +31,7 @@ export class MyTeamsPage {
     this.navCtrl.push(TournamentsPage);
   }
 
-  favoriteTapped($event, favorite){
+  favoriteTapped($event, favorite) {
     let loader = this.loadingController.create({
       content: 'Getting data...',
       dismissOnPageChange: true
@@ -36,12 +39,12 @@ export class MyTeamsPage {
     loader.present();
     this.Api.getTournamentData(favorite.tournamentId)
       .subscribe(t => {
-      this.Api.setCurrentTournament(t);
-      this.navCtrl.push(TeamHomePage, favorite);
-    });
+        this.Api.setCurrentTournament(t);
+        this.navCtrl.push(TeamHomePage, favorite);
+      });
   }
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     this.favorites = this.UserSettings.getAllFavorites();
   }
 

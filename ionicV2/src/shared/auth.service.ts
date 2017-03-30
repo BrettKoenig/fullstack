@@ -47,15 +47,34 @@ export class AuthService {
     }
   }
 
-  public externalLogin(provider) {
-    // return this.http.get('http://localhost:58352/api/Account/ExternalLogin?provider=Google&response_type=token&client_id=ngAuthApp&redirect_uri=http://localhost:8100/authcomplete.html')
-    //   .map((response: Response) => {
-    //     console.log("GET RE", response)
-    //     return response.json();
-    //   })
+  public setExternalUser(user) {
+    // // let urlSearchParams = new URLSearchParams();
+    // // //user.idToken,user.imageUrl,user.serverAuthCode,user.displayName,user.email,user.imageUrl
+    // // urlSearchParams.append('token', user.idToken);
+    // // urlSearchParams.append('serverCode', user.serverAuthCode);
+    // // urlSearchParams.append('email', user.email);
+    // // let body = urlSearchParams.toString()
+    // // let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlenconded' });
+    // // let options = new RequestOptions({ headers: headers });
+    // return this.http.post(`${this.baseUrl}/api/Account/RegisterExternalMobile`, user).map((response: Response) => {
+    //   let jsonResponse = response.json();
+    //   this.currentUser = new User(jsonResponse.userName, jsonResponse.userName, jsonResponse.access_token);
+    //   return jsonResponse;
+    // }).catch((error: any) => {
+    //   return Observable.throw(error.json().error_description || 'Server error')
+    // });
 
-    window.open('http://localhost:58352/api/Account/ExternalLogin?provider=Google&response_type=token&client_id=ngAuthApp&redirect_uri=http://localhost:8100/authorized.html');
+    console.log(`${this.baseUrl}/api/Account/RegisterExternalMobile`)
 
+    return this.http.post(`${this.baseUrl}/api/Account/RegisterExternalMobile`, user).map((response: Response) => {
+      let jsonResponse = response.json();
+      this.currentUser = new User(jsonResponse.userName, jsonResponse.userName, jsonResponse.access_token);
+      return jsonResponse;
+    }).catch((error: any) => {
+      return Observable.throw(error.json().error_description || 'Server error')
+    });
+    
+    
   }
 
   public register(credentials): Observable<any> {
@@ -75,8 +94,12 @@ export class AuthService {
     }
   }
 
-  public getUserInfo(): User {
-    return this.currentUser;
+  public getUserInfo() {
+    //return this.currentUser;
+    return Observable.create(observer => {
+      this.currentUser ? observer.next(this.currentUser) : observer.next(false);
+      observer.complete();
+    });
   }
 
   public logout() {

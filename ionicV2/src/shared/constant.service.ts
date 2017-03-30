@@ -5,6 +5,9 @@ export class Constant {
     constructor() { }
 
     getApiUrl(){
-        return 'http://localhost:58352';
+        //for emulator
+        return 'http://10.0.2.2:58352';
+        //for serve
+        //return 'http://localhost:58352';
     }
 }

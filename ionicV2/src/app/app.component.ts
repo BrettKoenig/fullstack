@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, LoadingController, Events } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { HttpModule } from '@angular/http';
+import { NativeStorage } from '@ionic-native/native-storage';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 import { MyTeamsPage, TournamentsPage, TeamHomePage, LoginPage } from '../pages/pages';
 import { Api, UserSettings, AuthService, Constant } from '../shared/shared';
@@ -13,7 +15,9 @@ import { Api, UserSettings, AuthService, Constant } from '../shared/shared';
     UserSettings,
     HttpModule,
     AuthService,
-    Constant
+    Constant,
+    NativeStorage,
+    GooglePlus
   ]
 })
 export class MyApp {
@@ -24,9 +28,10 @@ export class MyApp {
   rootPage: any = LoginPage;
   //was MyTeamsPage
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, private UserSettings: UserSettings, private LoadingController:LoadingController, private Api:Api, private Events:Events, private AuthService: AuthService) {
+  constructor(public platform: Platform, private UserSettings: UserSettings, private LoadingController: LoadingController, private Api: Api, private Events: Events, private AuthService: AuthService,
+    private googlePlus: GooglePlus, private nativeStorage: NativeStorage) {
     this.initializeApp();
   }
 
@@ -42,21 +47,31 @@ export class MyApp {
     });
   }
 
- refreshFavorites(){
-   this.favoriteTeams = this.UserSettings.getAllFavorites();
- }
+  refreshFavorites() {
+    this.favoriteTeams = this.UserSettings.getAllFavorites();
+  }
 
-  goHome(){
+  goHome() {
     this.nav.push(MyTeamsPage);
   }
-  
+
   logout() {
     this.AuthService.logout().subscribe(succ => {
-        this.nav.setRoot(LoginPage)
+      this.nav.setRoot(LoginPage)
     });
   }
 
-  goToTeam(favorite){
+  doGoogleLogout() {
+    this.googlePlus.logout()
+      .then(function (response) {
+        this.nativeStorage.remove('user');
+        this.nav.setRoot(LoginPage);
+      }, function (error) {
+        console.log(error);
+      })
+  }
+
+  goToTeam(favorite) {
     let loader = this.LoadingController.create({
       content: 'Getting data...',
       dismissOnPageChange: true
@@ -68,7 +83,7 @@ export class MyApp {
     })
   }
 
-  goToTournaments(){
+  goToTournaments() {
     this.nav.push(TournamentsPage);
   }
 }

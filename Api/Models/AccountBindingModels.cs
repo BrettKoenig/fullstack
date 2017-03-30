@@ -63,6 +63,8 @@ namespace Api.Models
 
         [Required]
         public string ExternalAccessToken { get; set; }
+
+        public string ServerAuthCode { get; set; }
     }
 
     public class ParsedExternalAccessToken

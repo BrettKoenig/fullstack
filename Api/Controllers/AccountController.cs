@@ -226,6 +226,54 @@ namespace Api.Controllers
             return Ok();
         }
 
+
+        // GET api/Account/RegisterExternal
+        //RegisterExternalBindingModel model instead of current params
+        //[OverrideAuthentication]
+        //[HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
+        //[AllowAnonymous]
+        //[Route("RegisterExternalMobile", Name = "RegisterExternalMobile")]
+        //public async Task<IHttpActionResult> RegisterExternalMobile(string provider, string error = null)
+        [AllowAnonymous]
+        [Route("RegisterExternalMobile")]
+        public async Task<IHttpActionResult> RegisterExternalMobile(RegisterExternalBindingModel model)
+        {
+            //TODO - hit this route and find out how to set user.identity
+            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+
+            if (externalLogin == null)
+            {
+                return InternalServerError();
+            }
+
+            //if (externalLogin.LoginProvider != provider)
+            //{
+            //    //maybe can pull line below out of a block and call it every time
+            //    Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            //    //return new ChallengeResult(provider, this);
+            //}
+
+            ApplicationUser user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider, externalLogin.ProviderKey));
+
+            bool hasRegistered = user != null;
+            
+            if (!hasRegistered)
+            {
+                Logout();
+                return await RegisterExternal(new RegisterExternalBindingModel
+                {
+                    Email = externalLogin.Email,
+                    UserName = externalLogin.Email,
+                    ExternalAccessToken = externalLogin.ExternalAccessToken,
+                    Provider = externalLogin.LoginProvider
+                });
+            }
+            else
+            {
+                return await ObtainLocalAccessToken(externalLogin.LoginProvider, externalLogin.ExternalAccessToken);
+            }
+        }
+        //http://localhost:58352/api/Account/ExternalLogin?provider=Google&response_type=token&client_id=ngAuthApp&redirect_uri=http://localhost:8100/authorized.html
         // GET api/Account/ExternalLogin
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
@@ -381,7 +429,7 @@ namespace Api.Controllers
 
             return Ok();
         }
-
+        
         // POST api/Account/RegisterExternal
         [AllowAnonymous]
         [Route("RegisterExternal")]
